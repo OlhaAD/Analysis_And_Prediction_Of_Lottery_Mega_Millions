@@ -30,6 +30,30 @@ Das Hauptziel dieses Forschungsprojekts besteht darin, historische Lotto-Daten z
 - Vergleich der Vorhersagen des LSTM-Modells mit den Ergebnissen der Trendanalyse zur Identifizierung von Gemeinsamkeiten und Unterschieden.
 
 ## Detaillierte Methodik
+### Werkzeuge und Bibliotheken
+Dieses Projekt verwendete die folgenden Werkzeuge und Bibliotheken:
+- **Python:** Die Hauptprogrammiersprache, die für die Datenanalyse und das Erstellen von Modellen verwendet wurde.
+
+- **Pandas:** Eine Bibliothek zur Datenmanipulation und -analyse. Verwendet für die Arbeit mit Dataframes.
+
+- **NumPy:** Eine Bibliothek für die Arbeit mit Arrays und numerische Berechnungen.
+
+- **Seaborn:** Eine Visualisierungsbibliothek, die auf matplotlib basiert. Verwendet für die Erstellung statistischer Diagramme.
+
+- **Matplotlib:** Die Hauptbibliothek für die Erstellung von Diagrammen und Visualisierungen.
+
+- **SciPy:** Eine Bibliothek für wissenschaftliche und technische Berechnungen. Verwendet für die Durchführung statistischer Operationen.
+
+- **Scikit-learn:** Eine maschinelle Lernbibliothek in Python. Verwendet für die Datenvorverarbeitung und Bewertung von Modellen.
+   - MinMaxScaler: Zum Skalieren der Daten.
+   - mean_absolute_error, mean_squared_error: Metriken zur Modellbewertung.
+
+- **TensorFlow und Keras:** Ein Framework und eine High-Level-Bibliothek zum Erstellen und Trainieren von neuronalen Netzwerken.
+   - Sequential: Verwendet zum Erstellen des neuronalen Netzwerks.
+   - LSTM: Langzeit-Kurzzeitspeicher-Schicht für rekurrente neuronale Netzwerke.
+   - Dense: Vollständig verbundene Schicht im neuronalen Netzwerk.
+   - Dropout: Regularisierungsschicht zur Vermeidung von Überanpassung.
+  
 ### Datensammlung und -vorverarbeitung
 - **Datenquelle:** Historische Lotto-Daten, einschließlich der Häufigkeit der gezogenen Gewinnzahlen.
 - **Vorverarbeitungsschritte:**
