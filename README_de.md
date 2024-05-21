@@ -55,7 +55,23 @@ Dieses Projekt verwendete die folgenden Werkzeuge und Bibliotheken:
    - Dropout: Regularisierungsschicht zur Vermeidung von Überanpassung.
   
 ### Datensammlung und -vorverarbeitung
-- **Datenquelle:** Historische Lotto-Daten, einschließlich der Häufigkeit der gezogenen Gewinnzahlen.
+- **Datenquelle:** Die Daten für dieses Projekt stammen von https://catalog.data.gov/dataset/lottery-mega-millions-winning-numbers-beginning-2002
+
+- **Datenbankstruktur:**
+Die Mega Millions Lotterie-Datenbank enthält Informationen über die Gewinnzahlen, einschließlich Mega Ball und Multiplier, zusammen mit Ziehungsdaten. Insgesamt umfasst die Datenbank 2290 Zeilen mit folgenden Details:
+   - Draw Date: Das Datum der Lotterieziehung, Datentyp - object.
+   - Winning Numbers: Die in der Lotterie gezogenen Zahlen, Datentyp - object.
+   - Mega Ball: Eine separate Nummer, die aus einem anderen Satz von Kugeln gezogen wird, Datentyp - int64.
+   - Multiplier: Eine optionale Funktion, die die Gewinnbeträge erhöht, Datentyp - float64.
+
+   | Draw Date   | Winning Numbers  | Mega Ball | Multiplier |
+   |-------------|------------------|-----------|------------|
+   | 09/25/2020  | 20 36 37 48 67   | 16        | 2.0        |
+   | 09/29/2020  | 14 39 43 44 67   | 19        | 3.0        |
+   | 10/02/2020  | 09 38 47 49 68   | 25        | 2.0        |
+   | 10/06/2020  | 15 16 18 39 59   | 17        | 3.0        |
+   | 10/09/2020  | 05 11 25 27 64   | 13        | 2.0        |
+  
 - **Vorverarbeitungsschritte:**
 1. Normalisierung und Skalierung der Daten für das Training des LSTM-Modells.
 2. Umwandlung der Daten in ein Format, das den Eingabeanforderungen des LSTM entspricht.
