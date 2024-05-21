@@ -31,6 +31,30 @@ The main goal of this research project is to analyze historical lottery data to 
    - Compare the LSTM model predictions with trend analysis results to identify similarities and differences.
 
 ## Detailed Methodology
+### Tools and Libraries
+This project utilized the following tools and libraries:
+- **Python:** The main programming language used for data analysis and model building.
+
+- **Pandas:** A library for data manipulation and analysis. Used for working with dataframes.
+
+- **NumPy:** A library for array handling and numerical computations.
+
+- **Seaborn:** A visualization library based on matplotlib. Used for creating statistical plots.
+
+- **Matplotlib:** The primary library for creating plots and visualizations.
+
+- **SciPy:** A library for scientific and technical computations. Used for performing statistical operations.
+
+- **Scikit-learn:** A machine learning library in Python. Used for data preprocessing and model evaluation.
+   - MinMaxScaler: For data scaling.
+   - mean_absolute_error, mean_squared_error: Metrics for model evaluation.
+
+- **TensorFlow and Keras:** A framework and high-level library for building and training neural networks.
+   - Sequential: Used for creating the neural network model.
+   - LSTM: Long Short-Term Memory layer for recurrent neural networks.
+   - Dense: Fully connected layer in the neural network.
+   - Dropout: Regularization layer to prevent overfitting.
+  
 ### Data Collection and Preprocessing
 - **Data Source:** Historical lottery data, including the frequency of winning numbers.
 - **Preprocessing Steps:**
