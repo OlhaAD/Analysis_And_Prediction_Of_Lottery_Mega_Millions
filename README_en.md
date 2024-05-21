@@ -56,7 +56,14 @@ This project utilized the following tools and libraries:
    - Dropout: Regularization layer to prevent overfitting.
   
 ### Data Collection and Preprocessing
-- **Data Source:** Historical lottery data, including the frequency of winning numbers.
+- **Data Source:** The data for this project is taken from https://catalog.data.gov/dataset/lottery-mega-millions-winning-numbers-beginning-2002
+- **Database Structure**
+The Mega Millions lottery database contains information about winning numbers, including Mega Ball and Multiplier, along with draw dates, totaling 2290 rows with the following details:
+   - **Draw Date:** The date of the lottery draw, data type - object.
+   - **Winning Numbers:** The numbers that were drawn in the lottery, data type - object.
+   - **Mega Ball:** A separate number drawn from a different set of balls, data type - int64.
+   - **Multiplier:** An optional feature that increases the winning amounts, data type - float64.
+   
 - **Preprocessing Steps:**
 1. Normalize and scale the data for LSTM model training.
 2. Reshape the data to fit the LSTM input requirements.
