@@ -59,11 +59,20 @@ This project utilized the following tools and libraries:
 - **Data Source:** The data for this project is taken from https://catalog.data.gov/dataset/lottery-mega-millions-winning-numbers-beginning-2002
 - **Database Structure**
 The Mega Millions lottery database contains information about winning numbers, including Mega Ball and Multiplier, along with draw dates, totaling 2290 rows with the following details:
+
+   | Draw Date   | Winning Numbers  | Mega Ball | Multiplier |
+   |-------------|------------------|-----------|------------|
+   | 09/25/2020  | 20 36 37 48 67   | 16        | 2.0        |
+   | 09/29/2020  | 14 39 43 44 67   | 19        | 3.0        |
+   | 10/02/2020  | 09 38 47 49 68   | 25        | 2.0        |
+   | 10/06/2020  | 15 16 18 39 59   | 17        | 3.0        |
+   | 10/09/2020  | 05 11 25 27 64   | 13        | 2.0        |
+  
    - **Draw Date:** The date of the lottery draw, data type - object.
    - **Winning Numbers:** The numbers that were drawn in the lottery, data type - object.
    - **Mega Ball:** A separate number drawn from a different set of balls, data type - int64.
    - **Multiplier:** An optional feature that increases the winning amounts, data type - float64.
-   
+
 - **Preprocessing Steps:**
 1. Normalize and scale the data for LSTM model training.
 2. Reshape the data to fit the LSTM input requirements.
