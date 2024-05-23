@@ -73,11 +73,11 @@ The Mega Millions lottery database contains information about winning numbers, i
    - **Mega Ball:** A separate number drawn from a different set of balls, data type - int64.
    - **Multiplier:** An optional feature that increases the winning amounts, data type - float64.
 
-- **Transformation und Bereinigung zur Analyse und Visualisierung:**
-- Aufteilen der Spalte "Winning Numbers" in fünf separate Spalten.
-- Umwandlung der Spalte "Draw Date" in das Datumsformat zur einfacheren Bearbeitung der Daten.
-- Entfernen der Spalte "Multiplier", da diese für die Analyse nicht benötigt wird.
-- Umwandlung der Nummern in ein numerisches Format für eine korrekte Verarbeitung.
+**Transformation and Cleaning for Analysis and Visualization:**
+- Splitting the "Winning Numbers" column into five separate columns.
+- Converting the "Draw Date" column to datetime format for easier date manipulation.
+- Dropping the "Multiplier" column as it is not needed for the analysis.
+- Converting the numbers to a numeric format for accurate processing.
 
 ```python
 df[['Number1', 'Number2', 'Number3', 'Number4', 'Number5']] = df['Winning Numbers'].str.split(expand=True)
@@ -87,9 +87,9 @@ columns_to_convert = ['Number1', 'Number2', 'Number3', 'Number4', 'Number5', 'Me
 df[columns_to_convert] = df[columns_to_convert].apply(pd.to_numeric, downcast='integer', errors='coerce')
 df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 ```
-- **Normalisierung und Skalierung für das Training des LSTM-Modells:**
-- Skalierung der numerischen Daten auf einen Bereich von 0 bis 1 zur Verbesserung der Modellleistung.
-- Umwandlung der Daten in ein Format, das den Anforderungen an den LSTM-Input entspricht.
+**Normalization and Scaling for LSTM Model Training:**
+- Scaling numeric data to a range of 0 to 1 to improve model performance.
+- Transforming data into a format that meets LSTM input requirements.
 
    
 ### Data Visualization
