@@ -72,9 +72,23 @@ Die Mega Millions Lotterie-Datenbank enthält Informationen über die Gewinnzahl
    | 10/06/2020  | 15 16 18 39 59   | 17        | 3.0        |
    | 10/09/2020  | 05 11 25 27 64   | 13        | 2.0        |
   
-- **Vorverarbeitungsschritte:**
-1. Normalisierung und Skalierung der Daten für das Training des LSTM-Modells.
-2. Umwandlung der Daten in ein Format, das den Eingabeanforderungen des LSTM entspricht.
+**Transformation und Bereinigung zur Analyse und Visualisierung:**
+- Aufteilen der Spalte "Winning Numbers" in fünf separate Spalten.
+- Umwandlung der Spalte "Draw Date" in das Datumsformat zur einfacheren Bearbeitung der Daten.
+- Entfernen der Spalte "Multiplier", da diese für die Analyse nicht benötigt wird.
+- Umwandlung der Nummern in ein numerisches Format für eine korrekte Verarbeitung.
+
+```python
+df[['Number1', 'Number2', 'Number3', 'Number4', 'Number5']] = df['Winning Numbers'].str.split(expand=True)
+df.drop('Winning Numbers', axis=1, inplace=True)
+df.drop('Multiplier', axis=1, inplace=True)
+columns_to_convert = ['Number1', 'Number2', 'Number3', 'Number4', 'Number5', 'Mega Ball']
+df[columns_to_convert] = df[columns_to_convert].apply(pd.to_numeric, downcast='integer', errors='coerce')
+df['Draw Date'] = pd.to_datetime(df['Draw Date'])
+```
+**Normalisierung und Skalierung für das Training des LSTM-Modells:**
+- Skalierung der numerischen Daten auf einen Bereich von 0 bis 1 zur Verbesserung der Modellleistung.
+- Umwandlung der Daten in ein Format, das den Anforderungen an den LSTM-Input entspricht.
    
 ### Datenvisualisierung
 - **Histogramm:** Zur Darstellung der Verteilung der Häufigkeit der gezogenen Zahlen.
