@@ -93,9 +93,15 @@ df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 
    
 ### Data Visualization
-- **Histogram:** To show the distribution of lottery number frequencies.
-- **Heatmaps:** To visualize the frequency of winning numbers over different years.
-- **Bar Charts:** To compare predicted frequencies from different models.
+- **Heatmap of Winning Numbers Frequency by Year**
+![HeatMapFrequencyOfWinningNumbersWithYears](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears.png)
+From this visualization, it is evident that the dataset should be divided into three time intervals according to changes in game rules to minimize the impact of these changes on number selection trends. The time intervals include:
+
+   - **2006-2012:** A period where the numbers ranged from 1 to 56. This segment provides stability and allows for trend analysis without the influence of changes in the number set.
+   - **2014-2017:** A period where the numbers ranged up to 75, allowing for the examination of player behavior with an increased number set.
+   - **2018-2023:** The most recent period with numbers up to 70, indicating new trends and changes in player strategies.
+
+Considering each period separately allows for a more accurate assessment of number popularity and trends over time, minimizing distortions caused by game rule changes. This approach lays the foundation for more reliable predictive modeling and strategic planning in the lottery context.
   
 ### Trend Analysis
 - **Statistical Analysis:** Calculate slopes, intercepts, and p-values to identify trends.
