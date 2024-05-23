@@ -91,9 +91,15 @@ df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 - Umwandlung der Daten in ein Format, das den Anforderungen an den LSTM-Input entspricht.
    
 ### Datenvisualisierung
-- **Histogramm:** Zur Darstellung der Verteilung der Häufigkeit der gezogenen Zahlen.
-- **Heatmaps:** Zur Visualisierung der Häufigkeit der gezogenen Gewinnzahlen nach Jahren.
-- **Balkendiagramme:** Zum Vergleich der prognostizierten Häufigkeiten verschiedener Modelle.
+- **Heatmap der Häufigkeit der Gewinnzahlen nach Jahr**
+![HeatMapFrequencyOfWinningNumbersWithYears](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears.png)
+Aus dieser Visualisierung geht hervor, dass der Datensatz gemäß den Änderungen der Spielregeln in drei Zeitintervalle unterteilt werden sollte, um die Auswirkungen dieser Änderungen auf die Trends bei der Auswahl der Zahlen zu minimieren. Die Zeitintervalle umfassen:
+
+   - **2006-2012:** Eine Periode, in der die Zahlen von 1 bis 56 reichten. Dieses Segment bietet Stabilität und ermöglicht eine Trendanalyse ohne den Einfluss von Änderungen im Zahlensatz.
+   - **2014-2017:** Eine Periode, in der die Zahlen bis 75 reichten, was die Untersuchung des Verhaltens der Spieler mit einer erhöhten Anzahl von Zahlen ermöglicht.
+   - **2018-2023:** Der aktuellste Zeitraum mit Zahlen bis 70, der auf neue Trends und Änderungen in den Spielerstrategien hinweist.
+  
+Die separate Betrachtung jedes Zeitraums ermöglicht eine genauere Bewertung der Beliebtheit und Trends bei der Zahlenauswahl im Laufe der Zeit und minimiert Verzerrungen, die durch Regeländerungen im Spiel verursacht werden. Dieser Ansatz bildet die Grundlage für zuverlässigere prädiktive Modellierungen und strategische Planungen im Kontext der Lotterie.
   
 ### Trendanalyse
 - **Statistische Analyse:** Berechnung von Steigungen, Achsenabschnitten und p-Werten zur Erkennung von Trends.
