@@ -91,7 +91,7 @@ df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 - Umwandlung der Daten in ein Format, das den Anforderungen an den LSTM-Input entspricht.
    
 ### Datenvisualisierung
-- **Heatmap der Häufigkeit der Gewinnzahlen nach Jahr**
+**Heatmap der Häufigkeit der Gewinnzahlen nach Jahr**
 ![HeatMapFrequencyOfWinningNumbersWithYears](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears.png)
 Aus dieser Visualisierung geht hervor, dass der Datensatz gemäß den Änderungen der Spielregeln in drei Zeitintervalle unterteilt werden sollte, um die Auswirkungen dieser Änderungen auf die Trends bei der Auswahl der Zahlen zu minimieren. Die Zeitintervalle umfassen:
 
@@ -100,7 +100,26 @@ Aus dieser Visualisierung geht hervor, dass der Datensatz gemäß den Änderunge
    - **2018-2023:** Der aktuellste Zeitraum mit Zahlen bis 70, der auf neue Trends und Änderungen in den Spielerstrategien hinweist.
   
 Die separate Betrachtung jedes Zeitraums ermöglicht eine genauere Bewertung der Beliebtheit und Trends bei der Zahlenauswahl im Laufe der Zeit und minimiert Verzerrungen, die durch Regeländerungen im Spiel verursacht werden. Dieser Ansatz bildet die Grundlage für zuverlässigere prädiktive Modellierungen und strategische Planungen im Kontext der Lotterie.
-  
+
+---------------------------------------------------------------------------------------------------------------------------
+**Beschreibung der Visualisierungen für die 56-Zahlen-Lotterie**
+
+Zur Analyse der Häufigkeit der Gewinnzahlen in der 56-Zahlen-Lotterie wurde ein horizontales Balkendiagramm erstellt. Das Balkendiagramm zeigt, wie oft jede Zahl über den gesamten betrachteten Zeitraum aufgetreten ist. Diese Visualisierung hilft dabei, die Zahlen zu identifizieren, die am häufigsten aufgetreten sind, was für weitere Analysen und Prognosen nützlich sein kann. Zusätzlich wurde eine Heatmap erstellt, um die Häufigkeit des Auftretens jeder Zahl über verschiedene Jahre in der 56-Zahlen-Lotterie darzustellen.
+
+![FrequencyOfWinningNumbersLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbers56.png)
+
+![HeatMapFrequencyOfWinninNumbersLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears56.png)
+
+Ein Histogramm wurde auch für die Mega Ball-Zahlen in der 56-Zahlen-Lotterie erstellt. Der Mega Ball ist eine separate Zahl, die aus einem anderen Satz von Kugeln gezogen wird. Diese Visualisierung hilft dabei, die Mega Ball-Zahlen zu identifizieren, die am häufigsten aufgetreten sind. Die Heatmap visualisiert die Häufigkeit des Auftretens des Mega Ball aufgeschlüsselt nach Jahr.
+
+![FrequencyOfWinningMegaBallsLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBall56nSort.png)
+
+![HeatMapFrequencyOfWinningMegaBallsLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBallByYears56nHM.png)
+
+![HistFrequencyOfWinningMegaBallsLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall56n.png)
+
+---------------------------------------------------------------------------------------------------------------------------
+
 ### Trendanalyse
 - **Statistische Analyse:** Berechnung von Steigungen, Achsenabschnitten und p-Werten zur Erkennung von Trends.
 - **Signifikanzschwelle:** Verwendung eines p-Werts < 0,3 zur Auswahl signifikanter Zahlen für die Trendanalyse.
