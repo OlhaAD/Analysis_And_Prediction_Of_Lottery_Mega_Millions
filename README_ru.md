@@ -135,7 +135,7 @@ df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 Также была построена гистограмма для номеров Mega Ball в лотерее из 75 номеров. Mega Ball - это отдельный номер, который вытягивается из другого набора шаров, а именно из 15 номеров. Эта визуализация помогает увидеть, какие номера Mega Ball выпадали чаще всего. Тепловая карта визуализирует частоту выпадения MegaBall в разбивке по годам.
 ![FrequencyOfWinningMegaBallsLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBall75nSort.png)
 
-![HeatMapFrequencyOfWinningMegaBallsLoto75]()
+![HeatMapFrequencyOfWinningMegaBallsLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBallByYears75nHM.png)
 
 ![HistFrequencyOfWinningMegaBallsLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall75n.png)
 
