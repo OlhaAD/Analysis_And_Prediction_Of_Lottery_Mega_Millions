@@ -110,7 +110,7 @@ Zur Analyse der Häufigkeit der Gewinnzahlen in der 56-Zahlen-Lotterie wurde ein
 
 ![HeatMapFrequencyOfWinninNumbersLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears56.png)
 
-Ein Histogramm wurde auch für die Mega Ball-Zahlen in der 56-Zahlen-Lotterie erstellt. Der Mega Ball ist eine separate Zahl, die aus einem anderen Satz von Kugeln gezogen wird. Diese Visualisierung hilft dabei, die Mega Ball-Zahlen zu identifizieren, die am häufigsten aufgetreten sind. Die Heatmap visualisiert die Häufigkeit des Auftretens des Mega Ball aufgeschlüsselt nach Jahr.
+Ein Histogramm wurde auch für die Mega Ball-Zahlen in der 56-Zahlen-Lotterie erstellt. Der Mega Ball ist eine separate Zahl, die aus einem weiteren Satz Bälle besteht, nämlich 46 Bällen. Diese Visualisierung hilft dabei, die Mega Ball-Zahlen zu identifizieren, die am häufigsten aufgetreten sind. Die Heatmap visualisiert die Häufigkeit des Auftretens des Mega Ball aufgeschlüsselt nach Jahr.
 
 ![FrequencyOfWinningMegaBallsLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBall56nSort.png)
 
@@ -119,7 +119,23 @@ Ein Histogramm wurde auch für die Mega Ball-Zahlen in der 56-Zahlen-Lotterie er
 ![HistFrequencyOfWinningMegaBallsLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall56n.png)
 
 ---------------------------------------------------------------------------------------------------------------------------
+**Beschreibung der Visualisierungen für die 75-Zahlen-Lotterie**
 
+Zur Analyse der Häufigkeit der Gewinnzahlen in der 75-Zahlen-Lotterie wurde ein horizontales Balkendiagramm erstellt. Das Balkendiagramm zeigt, wie oft jede Zahl über den gesamten betrachteten Zeitraum aufgetreten ist. Diese Visualisierung hilft dabei, die Zahlen zu identifizieren, die am häufigsten aufgetreten sind, was für weitere Analysen und Prognosen nützlich sein kann. Zusätzlich wurde eine Heatmap erstellt, um die Häufigkeit des Auftretens jeder Zahl über verschiedene Jahre in der 75-Zahlen-Lotterie darzustellen.
+
+![FrequencyOfWinningNumbersLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbers75.png)
+
+![HeatMapFrequencyOfWinninNumbersLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears75.png)
+
+Ein Histogramm wurde auch für die Mega Ball-Zahlen in der 75-Zahlen-Lotterie erstellt. Der Mega Ball ist eine separate Zahl, die aus einem weiteren Satz Bälle besteht, nämlich 15 Bällen. Diese Visualisierung hilft dabei, die Mega Ball-Zahlen zu identifizieren, die am häufigsten aufgetreten sind. Die Heatmap visualisiert die Häufigkeit des Auftretens des Mega Ball aufgeschlüsselt nach Jahr.
+
+![FrequencyOfWinningMegaBallsLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBall75nSort.png)
+
+![HeatMapFrequencyOfWinningMegaBallsLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBallByYears75nHM.png)
+
+![HistFrequencyOfWinningMegaBallsLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall75n.png)
+
+---------------------------------------------------------------------------------------------------------------------------
 ### Trendanalyse
 - **Statistische Analyse:** Berechnung von Steigungen, Achsenabschnitten und p-Werten zur Erkennung von Trends.
 - **Signifikanzschwelle:** Verwendung eines p-Werts < 0,3 zur Auswahl signifikanter Zahlen für die Trendanalyse.
