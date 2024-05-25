@@ -115,7 +115,7 @@ df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 
 ![HeatMapFrequencyOfWinninNumbersLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears56.png)
 
-Также была построена гистограмма для номеров Mega Ball в лотерее из 56 номеров. Mega Ball - это отдельный номер, который вытягивается из другого набора шаров. Эта визуализация помогает увидеть, какие номера MEga Ball выпадали чаще всего. Тепловая карта визуализирует частоту выпадения MegaBall в разбивке по годам.
+Также была построена гистограмма для номеров Mega Ball в лотерее из 56 номеров. Mega Ball - это отдельный номер, который вытягивается из другого набора шаров, а именно это 46 номеров. Эта визуализация помогает увидеть, какие номера Mega Ball выпадали чаще всего. Тепловая карта визуализирует частоту выпадения MegaBall в разбивке по годам.
 ![FrequencyOfWinningMegaBallsLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBall56nSort.png)
 
 ![HeatMapFrequencyOfWinningMegaBallsLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBallByYears56nHM.png)
@@ -123,6 +123,23 @@ df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 ![HistFrequencyOfWinningMegaBallsLoto56](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall56n.png)
 
 ---------------------------------------------------------------------------------------------------------------------------
+
+**Описание визуализаций для лотереи из 75 номеров**
+
+Для анализа частоты выпадения выигрышных номеров в лотерее, в которой участвовало 75 номеров, была построена горизонтальная гистограмма. Гистограмма показывает, как часто каждый номер выпадал за весь рассматриваемый период. Эта визуализация помогает увидеть, какие номера выпадали чаще всего, что может быть полезно для дальнейшего анализа и прогнозирования. Также построена тепловая карта, которая показывает частоту выпадения каждого номера за разные годы в лотерее с 75 номерами.
+
+![FrequencyOfWinningNumbersLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbers75.png)
+
+![HeatMapFrequencyOfWinninNumbersLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears75.png)
+
+Также была построена гистограмма для номеров Mega Ball в лотерее из 75 номеров. Mega Ball - это отдельный номер, который вытягивается из другого набора шаров, а именно из 15 номеров. Эта визуализация помогает увидеть, какие номера Mega Ball выпадали чаще всего. Тепловая карта визуализирует частоту выпадения MegaBall в разбивке по годам.
+![FrequencyOfWinningMegaBallsLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBall75nSort.png)
+
+![HeatMapFrequencyOfWinningMegaBallsLoto75]()
+
+![HistFrequencyOfWinningMegaBallsLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall75n.png)
+
+--------------------------------------------------------------------------------------------------------------------------
 
 ### Анализ трендов
 - **Статистический анализ:** Расчет углов наклона, пересечений и p-значений для выявления трендов.
