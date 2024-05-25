@@ -141,6 +141,23 @@ df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 
 --------------------------------------------------------------------------------------------------------------------------
 
+**Описание визуализаций для лотереи из 70 номеров**
+
+Для анализа частоты выпадения выигрышных номеров в лотерее, в которой участвовало 70 номеров, была построена горизонтальная гистограмма. Гистограмма показывает, как часто каждый номер выпадал за весь рассматриваемый период. Эта визуализация помогает увидеть, какие номера выпадали чаще всего, что может быть полезно для дальнейшего анализа и прогнозирования. Также построена тепловая карта, которая показывает частоту выпадения каждого номера за разные годы в лотерее с 70 номерами.
+
+![FrequencyOfWinningNumbersLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbers70.png)
+
+![HeatMapFrequencyOfWinninNumbersLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears70.png)
+
+Также была построена гистограмма для номеров Mega Ball в лотерее из 70 номеров. Mega Ball - это отдельный номер, который вытягивается из другого набора шаров, а именно из 25 номеров. Эта визуализация помогает увидеть, какие номера Mega Ball выпадали чаще всего. Тепловая карта визуализирует частоту выпадения MegaBall в разбивке по годам.
+![FrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBall70nSort.png)
+
+![HeatMapFrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBallByYears70nHM.png)
+
+![HistFrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall70n.png)
+
+---------------------------------------------------------------------------------------------------------------------------
+
 ### Анализ трендов
 - **Статистический анализ:** Расчет углов наклона, пересечений и p-значений для выявления трендов.
 - **Порог значимости:** Использование p-значения < 0.3 для выбора значимых номеров для анализа трендов.
