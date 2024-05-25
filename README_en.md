@@ -140,6 +140,24 @@ A histogram was also created for the Mega Ball numbers in the 75-number lottery.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
+**Description of Visualizations for the 70-number Lottery**
+
+To analyze the frequency of winning numbers in the 70-number lottery, a horizontal bar chart was created. The bar chart shows how often each number appeared over the entire period considered. This visualization helps identify the numbers that appeared most frequently, which can be useful for further analysis and forecasting. Additionally, a heatmap was created to show the frequency of each number appearing over different years in the 70-number lottery.
+
+![FrequencyOfWinningNumbersLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbers70.png)
+
+![HeatMapFrequencyOfWinninNumbersLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears70.png)
+
+A histogram was also created for the Mega Ball numbers in the 75-number lottery. Mega Ball is a separate number drawn from a different set of balls, namely from 25 balls. This visualization helps identify which Mega Ball numbers appeared most frequently. The heatmap visualizes the frequency of Mega Ball occurrences broken down by year.
+
+![FrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBall70nSort.png)
+
+![HeatMapFrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBallByYears70nHM.png)
+
+![HistFrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall70n.png)
+
+---------------------------------------------------------------------------------------------------------------------------
+
 ### Trend Analysis
 - **Statistical Analysis:** Calculate slopes, intercepts, and p-values to identify trends.
 - **Significance Threshold:** Use p-value < 0.3 to select significant numbers for trend analysis.
