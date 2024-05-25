@@ -136,6 +136,24 @@ Ein Histogramm wurde auch für die Mega Ball-Zahlen in der 75-Zahlen-Lotterie er
 ![HistFrequencyOfWinningMegaBallsLoto75](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall75n.png)
 
 ---------------------------------------------------------------------------------------------------------------------------
+
+**Beschreibung der Visualisierungen für die 70-Zahlen-Lotterie**
+
+Zur Analyse der Häufigkeit der Gewinnzahlen in der 70-Zahlen-Lotterie wurde ein horizontales Balkendiagramm erstellt. Das Balkendiagramm zeigt, wie oft jede Zahl über den gesamten betrachteten Zeitraum aufgetreten ist. Diese Visualisierung hilft dabei, die Zahlen zu identifizieren, die am häufigsten aufgetreten sind, was für weitere Analysen und Prognosen nützlich sein kann. Zusätzlich wurde eine Heatmap erstellt, um die Häufigkeit des Auftretens jeder Zahl über verschiedene Jahre in der 70-Zahlen-Lotterie darzustellen.
+
+![FrequencyOfWinningNumbersLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbers70.png)
+
+![HeatMapFrequencyOfWinninNumbersLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears70.png)
+
+Ein Histogramm wurde auch für die Mega Ball-Zahlen in der 70-Zahlen-Lotterie erstellt. Der Mega Ball ist eine separate Zahl, die aus einem weiteren Satz Bälle besteht, nämlich 25 Bällen. Diese Visualisierung hilft dabei, die Mega Ball-Zahlen zu identifizieren, die am häufigsten aufgetreten sind. Die Heatmap visualisiert die Häufigkeit des Auftretens des Mega Ball aufgeschlüsselt nach Jahr.
+
+![FrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBall70nSort.png)
+
+![HeatMapFrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfMegaBallByYears70nHM.png)
+
+![HistFrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall70n.png)
+
+---------------------------------------------------------------------------------------------------------------------------
 ### Trendanalyse
 - **Statistische Analyse:** Berechnung von Steigungen, Achsenabschnitten und p-Werten zur Erkennung von Trends.
 - **Signifikanzschwelle:** Verwendung eines p-Werts < 0,3 zur Auswahl signifikanter Zahlen für die Trendanalyse.
