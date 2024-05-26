@@ -31,6 +31,8 @@ The main goal of this research project is to analyze historical lottery data to 
    - Compare the performance of the LSTM model with traditional trend analysis.
 
 7. **Prediction and Comparison**
+   - Predicting the frequency of appearance of numbers based on their previous trends.
+   - Normalization of data to interpret the results as probabilities of choosing each number in a given year.
    - Predict the frequency of number appearances for future years using the trained LSTM model.
    - Compare the LSTM model predictions with trend analysis results to identify similarities and differences.
 
@@ -202,9 +204,39 @@ Shapiro-Wilk test results:
 Based on the results of the Shapiro-Wilk test, we can conclude that the distribution of winning frequencies is approximately normal for all considered periods, as the p-values in all cases exceed 0.05.
 
 ### Trend Analysis
-- **Statistical Analysis:** Calculate slopes, intercepts, and p-values to identify trends.
-- **Significance Threshold:** Use p-value < 0.3 to select significant numbers for trend analysis.
-  
+For trend analysis, there is no point in considering lotteries with 56 and 75 numbers, as they were held until 2013. It is more reasonable to focus on analyzing the current lottery with 70 numbers.
+
+#### Data Preparation
+   - **DataFrame:** The DataFrame heatmap_df70n is used, where each column represents a separate number, and the rows can represent the frequency of appearance of this number in different time periods.
+   - **Adding a Constant:** For each number, an array X is created with a constant and an index (time), allowing the model to account for the intercept.
+   - **Regression Model:** An OLS (Ordinary Least Squares) model is built for each number, where the dependent variable y is the frequency of the number, and the independent variables are time.
+   - **Saving Results:** The results of the model, including the slope, intercept, and p-value, are saved in the dictionary trends.
+   - **Transforming Results into DataFrame:** The dictionary trends is converted into a DataFrame trends_df for easier analysis and data visualization.
+This approach allows us to analyze the trends in the frequency of each number over time and determine which numbers are becoming more or less popular.
+
+```python
+trends = {}
+for column in heatmap_df70n.columns:
+    # Checking if a column is numeric
+    if pd.api.types.is_numeric_dtype(heatmap_df70n[column]):
+        X = sm.add_constant(np.arange(len(heatmap_df70n)))  
+        y = heatmap_df70n[column].astype(float).values  
+        model = sm.OLS(y, X)
+        results = model.fit()
+        # Save the results for each number
+        trends[column] = {'Slope': results.params[1], 'Intercept': results.params[0], 'P-value': results.pvalues[1]}
+
+# Transform the dictionary into a DataFrame for ease of analysis
+trends_df = pd.DataFrame(trends).T
+# Set options to display all rows
+pd.set_option('display.max_rows', None)
+print(trends_df)
+```
+
+These results for the linear regression of each lottery number show the slope coefficient Slope and the p-value. The slope coefficient indicates the direction of the trend (a positive value means an increase in frequency, a negative value means a decrease), and the p-value indicates the statistical significance of this trend.
+
+Numbers with significant negative trends and low p-values (for example, number 14 with a Slope of -0.942857 and a P-value of 0.031797) show a statistically significant decrease in frequency over time. Numbers with significant positive trends and low p-values (for example, number 18 with a Slope of 2.028571 and a P-value of 0.037760) show a statistically significant increase in frequency.
+
 ### LSTM Model Development
 - **Model Architecture:**
 1. LSTM layers with dropout for regularization.
@@ -223,9 +255,62 @@ MAE and RMSE for both training and test sets.
 Compare the error metrics to determine the best-performing model configuration.
 
 ### Prediction and Comparison
-- **Future Predictions:**
-Predict lottery number frequencies for the years 2024, 2025, 2026, and 2027.
-- **Comparison with Trend Analysis:**
+#### Forecasting Number Frequencies
+
+Forecasting the frequency of lottery numbers is based on their previous trends (slope and intercept determined through linear regression). For each significant number (i.e., numbers with a p-value less than 0.3), the predicted frequency is calculated based on the trend line equation, where the intercept is the initial value and the slope is the rate of change in frequency over the years. Then, for each year in the given range, the predicted values are calculated. The resulting DataFrame predicted_df70n is normalized so that the values in each year sum to 1, allowing the results to be interpreted as the probabilities of selecting each number in that year.
+
+```python
+# Years to forecast
+years = np.arange(2024, 2028)
+# Converting a dictionary to a DataFrame with the correct columns
+trends_df70n = pd.DataFrame.from_dict(trends, orient='index', columns=['Intercept', 'Slope', 'P-value'])
+# Determining the threshold for p-values p < 0.3
+significant_numbers = trends_df70n[trends_df70n['P-value'] < 0.3]
+predicted_frequencies = {}
+for index, row in significant_numbers.iterrows():
+    predicted_frequencies[index] = row['Intercept'] + row['Slope'] * (years - 2023)
+predicted_df70n = pd.DataFrame(predicted_frequencies, index=years)
+# Normalizing values
+probability_df70n = predicted_df70n.div(predicted_df70n.sum(axis=1), axis=0)
+print(probability_df70n)
+# Visualization
+fig, axs = plt.subplots(2, 2, figsize=(14, 10))
+for i, year in enumerate(years):
+    row = i // 2
+    col = i % 2
+    probability_df70n.loc[year].plot(kind='bar', ax=axs[row, col], color='indigo')
+    axs[row, col].set_title(f'Predicted probabilities for {year} year')
+    axs[row, col].set_xlabel('Number')
+    axs[row, col].set_ylabel('Probability')
+
+plt.tight_layout()
+plt.show()
+# Numbers with significant positive trends and low p-values
+selected_numbers_df70n = trends_df70n[(trends_df70n['P-value'] < 0.3) & (trends_df70n['Slope'] > 0)]
+print("Selected Numbers with Positive Trends and Low P-Values", selected_numbers_df70n.index.tolist())
+```
+
+Based on these data, numbers with positive trends and low p-values were selected:
+```python
+Selected Numbers with Positive Trends and Low P-Values: [3, 8, 15, 18, 19, 21, 36, 45, 47, 50, 51, 52, 55, 61]
+```
+
+**Visualizations of projected probabilities for 2024-2027:**
+
+![PredictedProbabilitiesTrends70Numbers](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesFor2024_2027.png)
+
+#### Prediction for Mega Ball
+A similar process was followed for Mega Ball numbers. As a result, the following Mega Ball numbers with positive trends and low p-values were selected:
+
+```python
+Selected Mega Balls with Positive Trends and Low P-Values: [12, 13, 18, 24, 25]
+```
+
+**Visualizations of projected Mega Ball probabilities for 2024-2027:**
+
+![PredictedProbabilitiesTrendsMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesMegaBall.png)
+
+#### Comparison with Trend Analysis:
 Visualize and compare the predicted frequencies from the LSTM model and trend analysis.
 
 
