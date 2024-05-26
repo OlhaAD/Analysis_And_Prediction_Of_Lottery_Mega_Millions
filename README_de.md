@@ -31,6 +31,8 @@ Das Hauptziel dieses Forschungsprojekts besteht darin, historische Lotto-Daten z
    - Vergleich der Leistung des LSTM-Modells mit der traditionellen Trendanalyse.
 
 7. **Vorhersage und Vergleich**
+   - Vorhersage der Häufigkeit des Auftretens von Zahlen basierend auf ihren vorherigen Trends.
+   - Normalisierung der Daten, um die Ergebnisse als Wahrscheinlichkeiten für die Wahl jeder Zahl in einem bestimmten Jahr zu interpretieren.
    - Vorhersage der Häufigkeit der gezogenen Zahlen für zukünftige Jahre unter Verwendung des trainierten LSTM-Modells.
    - Vergleich der Vorhersagen des LSTM-Modells mit den Ergebnissen der Trendanalyse zur Identifizierung von Gemeinsamkeiten und Unterschieden.
 
@@ -201,9 +203,38 @@ Ergebnisse des Shapiro-Wilk-Tests:
 Basierend auf den Ergebnissen des Shapiro-Wilk-Tests können wir schließen, dass die Verteilung der Gewinnfrequenzen für alle betrachteten Zeiträume ungefähr normal ist, da die p-Werte in allen Fällen 0,05 übersteigen.
 
 ### Trendanalyse
-- **Statistische Analyse:** Berechnung von Steigungen, Achsenabschnitten und p-Werten zur Erkennung von Trends.
-- **Signifikanzschwelle:** Verwendung eines p-Werts < 0,3 zur Auswahl signifikanter Zahlen für die Trendanalyse.
-  
+Für die Trendanalyse macht es keinen Sinn, Lotterien mit 56 und 75 Zahlen zu betrachten, da diese bis 2013 durchgeführt wurden. Es ist sinnvoller, sich auf die Analyse der aktuellen Lotterie mit 70 Zahlen zu konzentrieren.
+
+#### Datenaufbereitung
+   - **DataFrame:** Der DataFrame heatmap_df70n wird verwendet, wobei jede Spalte eine separate Zahl darstellt und die Zeilen die Häufigkeit des Auftretens dieser Zahl in verschiedenen Zeiträumen darstellen können.
+   - **Hinzufügen einer Konstante:** Für jede Zahl wird ein Array X mit einer Konstante und einem Index (Zeit) erstellt, wodurch das Modell den Intercept berücksichtigen kann.
+   - **Regressionsmodell:** Für jede Zahl wird ein OLS (Ordinary Least Squares) Modell erstellt, wobei die abhängige Variable y die Häufigkeit der Zahl und die unabhängigen Variablen die Zeit sind.
+   - **Speicherung der Ergebnisse:** Die Ergebnisse des Modells, einschließlich des Steigungswertes (slope), des Intercepts und des p-Wertes, werden im Wörterbuch trends gespeichert.
+   - **Umwandlung der Ergebnisse in DataFrame:** Das Wörterbuch trends wird in einen DataFrame trends_df umgewandelt, um die Analyse und Visualisierung der Daten zu erleichtern.
+Dieser Ansatz ermöglicht es, die Trends in der Häufigkeit jeder Zahl im Laufe der Zeit zu analysieren und festzustellen, welche Zahlen beliebter oder weniger beliebt werden.
+
+```python
+trends = {}
+for column in heatmap_df70n.columns:
+    # Проверяем, является ли столбец числовым
+    if pd.api.types.is_numeric_dtype(heatmap_df70n[column]):
+        X = sm.add_constant(np.arange(len(heatmap_df70n)))  # Zeit
+        y = heatmap_df70n[column].astype(float).values  # Häufigkeit des Vorkommens der Zahl
+        model = sm.OLS(y, X)
+        results = model.fit()
+        # Speichern die Ergebnisse für jede Zahl
+        trends[column] = {'Slope': results.params[1], 'Intercept': results.params[0], 'P-value': results.pvalues[1]}
+
+# Konvertieren eines Wörterbuchs in einen DataFrame zur Analyse
+trends_df = pd.DataFrame(trends).T
+# Legen Sie Optionen fest, um alle Zeilen anzuzeigen
+pd.set_option('display.max_rows', None)
+print(trends_df)
+```
+Diese Ergebnisse der linearen Regression für jede Lotterienummer zeigen den Steigungskoeffizienten Slope und den p-Wert. Der Steigungskoeffizient gibt die Richtung des Trends an (ein positiver Wert bedeutet eine Zunahme der Häufigkeit, ein negativer Wert bedeutet eine Abnahme), und der p-Wert gibt die statistische Signifikanz dieses Trends an.
+
+Zahlen mit signifikant negativen Trends und niedrigen p-Werten (zum Beispiel Nummer 14 mit einem Slope von -0,942857 und einem P-Wert von 0,031797) zeigen eine statistisch signifikante Abnahme der Häufigkeit im Laufe der Zeit. Zahlen mit signifikant positiven Trends und niedrigen p-Werten (zum Beispiel Nummer 18 mit einem Slope von 2,028571 und einem P-Wert von 0,037760) zeigen eine statistisch signifikante Zunahme der Häufigkeit.
+
 ### Entwicklung eines LSTM-Modells
 - **Modellarchitektur:**
   1. LSTM-Schichten mit Dropout zur Regularisierung.
@@ -220,7 +251,60 @@ Basierend auf den Ergebnissen des Shapiro-Wilk-Tests können wir schließen, das
 - **Vergleich:** Vergleich der Fehler zur Bestimmung der besten Modellkonfiguration.
 - 
 ### Vorhersage und Vergleich
-- **Vorhersage der Zukunft:** Vorhersage der Häufigkeit der gezogenen Zahlen für die Jahre 2024, 2025, 2026 und 2027.
+#### Prognose der Häufigkeit von Zahlen
+Die Prognose der Häufigkeit von Lotteriezahlen basiert auf ihren bisherigen Trends (Steigung und Achsenabschnitt, die durch lineare Regression bestimmt werden). Für jede signifikante Zahl (d.h. Zahlen mit einem p-Wert kleiner als 0,3) wird die vorhergesagte Häufigkeit basierend auf der Gleichung der Trendlinie berechnet, wobei der Achsenabschnitt den Anfangswert darstellt und die Steigung die Änderungsrate der Häufigkeit über die Jahre angibt. Dann werden für jedes Jahr im angegebenen Bereich die vorhergesagten Werte berechnet. Der resultierende DataFrame predicted_df70n wird normalisiert, sodass die Werte in jedem Jahr auf 1 summiert werden, was es ermöglicht, die Ergebnisse als Wahrscheinlichkeiten für die Auswahl jeder Zahl in diesem Jahr zu interpretieren.
+
+```python
+# Zu prognostizierende Jahre
+years = np.arange(2024, 2028)
+# Konvertieren eines Wörterbuchs in einen DataFrame mit den richtigen Spalten 
+trends_df70n = pd.DataFrame.from_dict(trends, orient='index', columns=['Intercept', 'Slope', 'P-value'])
+# Bestimmung des Schwellenwerts  p < 0,3
+significant_numbers = trends_df70n[trends_df70n['P-value'] < 0.3]
+predicted_frequencies = {}
+for index, row in significant_numbers.iterrows():
+    predicted_frequencies[index] = row['Intercept'] + row['Slope'] * (years - 2023)
+predicted_df70n = pd.DataFrame(predicted_frequencies, index=years)
+# Normalisierende Werte
+probability_df70n = predicted_df70n.div(predicted_df70n.sum(axis=1), axis=0)
+print(probability_df70n)
+# Visualisirung
+fig, axs = plt.subplots(2, 2, figsize=(14, 10))
+for i, year in enumerate(years):
+    row = i // 2
+    col = i % 2
+    probability_df70n.loc[year].plot(kind='bar', ax=axs[row, col], color='indigo')
+    axs[row, col].set_title(f'Predicted probabilities for {year} year')
+    axs[row, col].set_xlabel('Number')
+    axs[row, col].set_ylabel('Probability')
+
+plt.tight_layout()
+plt.show()
+# Zahlen mit deutlich positiven Trends und niedrigen p-Werten
+selected_numbers_df70n = trends_df70n[(trends_df70n['P-value'] < 0.3) & (trends_df70n['Slope'] > 0)]
+print("Selected Numbers with Positive Trends and Low P-Values", selected_numbers_df70n.index.tolist())
+```
+
+Basierend auf diesen Daten wurden Zahlen mit positiven Trends und niedrigen p-Werten ausgewählt:
+```python
+Selected Numbers with Positive Trends and Low P-Values: [3, 8, 15, 18, 19, 21, 36, 45, 47, 50, 51, 52, 55, 61]
+```
+
+**Visualisierungen der prognostizierten Wahrscheinlichkeiten für 2024–2027:**
+
+![PredictedProbabilitiesTrends70Numbers](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesFor2024_2027.png)
+
+#### Vorhersage für Mega Ball
+Ein ähnlicher Prozess wurde für Mega Ball-Zahlen befolgt. Als Ergebnis wurden die folgenden Mega Ball-Zahlen mit positiven Trends und niedrigen p-Werten ausgewählt:
+
+```python
+Selected Mega Balls with Positive Trends and Low P-Values: [12, 13, 18, 24, 25]
+```
+
+**Visualisierungen der prognostizierten Mega Ball-Wahrscheinlichkeiten für 2024–2027:**
+
+![PredictedProbabilitiesTrendsMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesMegaBall.png)
+
 - **Vergleich mit der Trendanalyse:** Visualisierung und Vergleich der prognostizierten Häufigkeiten des LSTM-Modells und der Trendanalyse.
   
 ## Fazit
