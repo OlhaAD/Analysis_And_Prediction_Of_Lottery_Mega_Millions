@@ -6,28 +6,33 @@ Das Hauptziel dieses Forschungsprojekts besteht darin, historische Lotto-Daten z
 
 ### Aufgaben
 1. **Datensammlung und -vorverarbeitung**
-- Sammlung und Vorverarbeitung historischer Lotto-Daten mit Fokus auf die Häufigkeit der gezogenen Zahlen im Laufe der Zeit.
-- Umwandlung der Daten in Formate, die für die Analyse und das Training von maschinellen Lernmodellen geeignet sind.
+   - Sammlung und Vorverarbeitung historischer Lotto-Daten mit Fokus auf die Häufigkeit der gezogenen Zahlen im Laufe der Zeit.
+   - Umwandlung der Daten in Formate, die für die Analyse und das Training von maschinellen Lernmodellen geeignet sind.
    
 2. **Datenvisualisierung**
-- Visualisierung der historischen Verteilungen der Häufigkeit der gezogenen Zahlen zur Erkennung von Trends und Mustern.
-- Erstellung verschiedener Diagramme und Heatmaps zur effektiven Darstellung der Daten.
-   
-3. **Trendanalyse**
-- Durchführung einer Trendanalyse zur Identifizierung signifikanter Zahlen basierend auf historischen Daten.
-- Berechnung von Steigungen, Achsenabschnitten und p-Werten für jede Lottozahl zur Bestimmung ihrer statistischen Signifikanz.
-   
-4. **Entwicklung eines LSTM-Modells**
-- Entwicklung und Training von LSTM-Modellen zur Vorhersage der Häufigkeit der gezogenen Zahlen in der Zukunft.
-- Optimierung des Modells unter Verwendung verschiedener Hyperparameter wie der Rückkopplungsperiode (look-back), um die Genauigkeit der Vorhersagen zu erhöhen.
+   - Visualisierung der historischen Verteilungen der Häufigkeit der gezogenen Zahlen zur Erkennung von Trends und Mustern.
+   - Erstellung verschiedener Diagramme und Heatmaps zur effektiven Darstellung der Daten.
 
-5. **Modellbewertung**
-- Bewertung der Leistung des LSTM-Modells unter Verwendung von Metriken wie dem mittleren absoluten Fehler (MAE) und dem Root Mean Squared Error (RMSE).
-- Vergleich der Leistung des LSTM-Modells mit der traditionellen Trendanalyse.
-- 
-6. **Vorhersage und Vergleich**
-- Vorhersage der Häufigkeit der gezogenen Zahlen für zukünftige Jahre unter Verwendung des trainierten LSTM-Modells.
-- Vergleich der Vorhersagen des LSTM-Modells mit den Ergebnissen der Trendanalyse zur Identifizierung von Gemeinsamkeiten und Unterschieden.
+3. **Datenanalyse**
+
+   - Erstellen von Q-Q-Diagrammen zur Überprüfung der Normalverteilung der Ziehfrequenzen.
+   - Durchführung des Shapiro-Wilk-Tests zur statistischen Bewertung der Normalität der Daten.
+
+4. **Trendanalyse**
+   - Durchführung einer Trendanalyse zur Identifizierung signifikanter Zahlen basierend auf historischen Daten.
+   - Berechnung von Steigungen, Achsenabschnitten und p-Werten für jede Lottozahl zur Bestimmung ihrer statistischen Signifikanz.
+   
+5. **Entwicklung eines LSTM-Modells**
+   - Entwicklung und Training von LSTM-Modellen zur Vorhersage der Häufigkeit der gezogenen Zahlen in der Zukunft.
+   - Optimierung des Modells unter Verwendung verschiedener Hyperparameter wie der Rückkopplungsperiode (look-back), um die Genauigkeit der Vorhersagen zu erhöhen.
+
+6. **Modellbewertung**
+   - Bewertung der Leistung des LSTM-Modells unter Verwendung von Metriken wie dem mittleren absoluten Fehler (MAE) und dem Root Mean Squared Error (RMSE).
+   - Vergleich der Leistung des LSTM-Modells mit der traditionellen Trendanalyse.
+
+7. **Vorhersage und Vergleich**
+   - Vorhersage der Häufigkeit der gezogenen Zahlen für zukünftige Jahre unter Verwendung des trainierten LSTM-Modells.
+   - Vergleich der Vorhersagen des LSTM-Modells mit den Ergebnissen der Trendanalyse zur Identifizierung von Gemeinsamkeiten und Unterschieden.
 
 ## Detaillierte Methodik
 ### Werkzeuge und Bibliotheken
@@ -154,6 +159,47 @@ Ein Histogramm wurde auch für die Mega Ball-Zahlen in der 70-Zahlen-Lotterie er
 ![HistFrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall70n.png)
 
 ---------------------------------------------------------------------------------------------------------------------------
+
+### Datenanalyse
+
+Um die Normalität der Verteilung der Gewinnfrequenzen in der Lotterie zu überprüfen, wurden Q-Q-Diagramme erstellt und der Shapiro-Wilk-Test durchgeführt.
+
+#### Q-Q-Diagramme
+
+Das Q-Q-Diagramm vergleicht die Quantile der Frequenzverteilung des Datensatzes mit einer theoretischen Normalverteilung. Die Tatsache, dass die meisten unserer Datenpunkte entlang einer geraden Linie liegen (mit einigen Abweichungen an den Enden), deutet darauf hin, dass die Häufigkeit des Auftretens von Zahlen ungefähr einer Normalverteilung folgt.
+
+- **Q-Q-Diagramm für den Zeitraum 2006-2012 für die 56-Zahlen-Lotterie:**
+
+![Q-Q Plot for 2006-2012](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/QQPlotFrequency_for_2006-2012.png)
+
+- **Q-Q-Diagramm für den Zeitraum 2014-2017 für die 75-Zahlen-Lotterie:**
+
+![Q-Q Plot for 2014-2017](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/QQPlotFrequency_for_2014-2017.png)
+
+- **Q-Q-Diagramm für den Zeitraum 2018-2023 für die 70-Zahlen-Lotterie:**
+
+![Q-Q Plot for 2018-2023](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/QQPlotFrequency_for_2018-2023.png)
+
+#### Shapiro-Wilk-Test
+
+Der Shapiro-Wilk-Test überprüft weiter die Normalität der Daten. Das Ergebnis des Tests liefert einen p-Wert, der verwendet werden kann, um zu bestimmen, ob die Nullhypothese, dass die Daten normalverteilt sind, verworfen werden sollte. Ein hoher p-Wert (typischerweise größer als 0,05) bedeutet, dass die Nullhypothese der Normalität nicht verworfen werden kann, was darauf hinweist, dass die Daten für bestimmte statistische Tests und Konfidenzintervalle, die Normalität voraussetzen, als normal verteilt betrachtet werden können.
+
+Ergebnisse des Shapiro-Wilk-Tests:
+
+- **2006-2012 für die 56-Zahlen-Lotterie:**
+  - statistic: 0.9777
+  - p-Wert: 0.3827
+
+- **2014-2017 für die 75-Zahlen-Lotterie:**
+  - statistic: 0.9804
+  - p-Wert: 0.2958
+
+- **2018-2023 für die 70-Zahlen-Lotterie:**
+  - statistic: 0.9760
+  - p-Wert: 0.1988
+
+Basierend auf den Ergebnissen des Shapiro-Wilk-Tests können wir schließen, dass die Verteilung der Gewinnfrequenzen für alle betrachteten Zeiträume ungefähr normal ist, da die p-Werte in allen Fällen 0,05 übersteigen.
+
 ### Trendanalyse
 - **Statistische Analyse:** Berechnung von Steigungen, Achsenabschnitten und p-Werten zur Erkennung von Trends.
 - **Signifikanzschwelle:** Verwendung eines p-Werts < 0,3 zur Auswahl signifikanter Zahlen für die Trendanalyse.
