@@ -14,19 +14,23 @@ The main goal of this research project is to analyze historical lottery data to 
    - Visualize historical distributions of number appearance frequencies to identify trends and patterns.
    - Create various charts and heatmaps for effective data representation.
 
-3. **Trend Analysis**
+3. **Data Analysis**
+   - Create Q-Q plots to check the normality of the distribution of winning frequencies.
+   - Conduct the Shapiro-Wilk test to statistically assess the normality of the data.
+     
+4. **Trend Analysis**
    - Conduct trend analysis to identify significant numbers based on historical data.
    - Calculate slopes, intercepts, and p-values for each lottery number to determine their statistical significance.
 
-4. **LSTM Model Development**
+5. **LSTM Model Development**
    - Develop and train LSTM models to predict future frequencies of number appearances.
    - Optimize the model using various hyperparameters, such as the look-back period, to enhance prediction accuracy.
 
-5. **Model Evaluation**
+6. **Model Evaluation**
    - Evaluate the performance of the LSTM model using metrics such as Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).
    - Compare the performance of the LSTM model with traditional trend analysis.
 
-6. **Prediction and Comparison**
+7. **Prediction and Comparison**
    - Predict the frequency of number appearances for future years using the trained LSTM model.
    - Compare the LSTM model predictions with trend analysis results to identify similarities and differences.
 
@@ -93,7 +97,7 @@ df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 
    
 ### Data Visualization
-**Heatmap of Winning Numbers Frequency by Year**
+#### Heatmap of Winning Numbers Frequency by Year
 ![HeatMapFrequencyOfWinningNumbersWithYears](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears.png)
 From this visualization, it is evident that the dataset should be divided into three time intervals according to changes in game rules to minimize the impact of these changes on number selection trends. The time intervals include:
 
@@ -104,7 +108,7 @@ From this visualization, it is evident that the dataset should be divided into t
 Considering each period separately allows for a more accurate assessment of number popularity and trends over time, minimizing distortions caused by game rule changes. This approach lays the foundation for more reliable predictive modeling and strategic planning in the lottery context.
 
 ---------------------------------------------------------------------------------------------------------------------------
-**Description of Visualizations for the 56-number Lottery**
+#### Description of Visualizations for the 56-number Lottery
 
 To analyze the frequency of winning numbers in the 56-number lottery, a horizontal bar chart was created. The bar chart shows how often each number appeared over the entire period considered. This visualization helps identify the numbers that appeared most frequently, which can be useful for further analysis and forecasting. Additionally, a heatmap was created to show the frequency of each number appearing over different years in the 56-number lottery.
 
@@ -122,7 +126,7 @@ A histogram was also created for the Mega Ball numbers in the 56-number lottery.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-**Description of Visualizations for the 75-number Lottery**
+#### Description of Visualizations for the 75-number Lottery
 
 To analyze the frequency of winning numbers in the 75-number lottery, a horizontal bar chart was created. The bar chart shows how often each number appeared over the entire period considered. This visualization helps identify the numbers that appeared most frequently, which can be useful for further analysis and forecasting. Additionally, a heatmap was created to show the frequency of each number appearing over different years in the 75-number lottery.
 
@@ -140,7 +144,7 @@ A histogram was also created for the Mega Ball numbers in the 75-number lottery.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-**Description of Visualizations for the 70-number Lottery**
+#### Description of Visualizations for the 70-number Lottery
 
 To analyze the frequency of winning numbers in the 70-number lottery, a horizontal bar chart was created. The bar chart shows how often each number appeared over the entire period considered. This visualization helps identify the numbers that appeared most frequently, which can be useful for further analysis and forecasting. Additionally, a heatmap was created to show the frequency of each number appearing over different years in the 70-number lottery.
 
@@ -157,6 +161,45 @@ A histogram was also created for the Mega Ball numbers in the 75-number lottery.
 ![HistFrequencyOfWinningMegaBallsLoto70](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/HistFrequencyOfMegaBall70n.png)
 
 ---------------------------------------------------------------------------------------------------------------------------
+### Data Analysis
+
+To check the normality of the distribution of winning frequencies in the lottery, Q-Q plots were created and the Shapiro-Wilk test was performed.
+
+#### Q-Q Plots
+
+The Q-Q plot compares the quantiles of the frequency distribution of the dataset with a theoretical normal distribution. The fact that most of our data points lie along a straight line (with some deviation at the ends) suggests that the frequency of number occurrences approximately follows a normal distribution.
+
+- **Q-Q Plot for the period 2006-2012 for the 56-number Lottery:**
+
+![Q-Q Plot for 2006-2012](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/QQPlotFrequency_for_2006-2012.png)
+
+- **Q-Q Plot for the period 2014-2017 for the 75-number Lottery:**
+
+![Q-Q Plot for 2014-2017](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/QQPlotFrequency_for_2014-2017.png)
+
+- **Q-Q Plot for the period 2018-2023 for the 70-number Lottery:**
+
+![Q-Q Plot for 2018-2023](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/QQPlotFrequency_for_2018-2023.png)
+
+#### Shapiro-Wilk Test
+
+The Shapiro-Wilk test further checks the normality of the data. The result of the test provides a p-value, which can be used to determine whether to reject the null hypothesis that the data is normally distributed. A high p-value (typically greater than 0.05) means that the null hypothesis of normality cannot be rejected, indicating that the data can be considered normally distributed for certain statistical tests and confidence interval constructions that assume normality.
+
+Shapiro-Wilk test results:
+
+- **2006-2012 for the 56-number Lottery:**
+  - statistic: 0.9777
+  - p-value: 0.3827
+
+- **2014-2017 for the 75-number Lottery:**
+  - statistic: 0.9804
+  - p-value: 0.2958
+
+- **2018-2023 for the 70-number Lottery:**
+  - statistic: 0.9760
+  - p-value: 0.1988
+
+Based on the results of the Shapiro-Wilk test, we can conclude that the distribution of winning frequencies is approximately normal for all considered periods, as the p-values in all cases exceed 0.05.
 
 ### Trend Analysis
 - **Statistical Analysis:** Calculate slopes, intercepts, and p-values to identify trends.
