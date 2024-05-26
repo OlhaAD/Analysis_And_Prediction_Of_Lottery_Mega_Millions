@@ -30,6 +30,8 @@
   - Сравнение производительности модели LSTM с традиционным анализом трендов.
 
 7. **Прогнозирование и сравнение**
+  - Прогнозирование частоты появления номеров на основе их предыдущих трендов.
+  - Нормализация данных для интерпретации результатов как вероятностей выбора каждого номера в данном году.
   - Прогнозирование частоты выпадения номеров на будущие годы с использованием обученной модели LSTM.
   - Сравнение прогнозов модели LSTM с результатами анализа трендов для выявления сходств и расхождений.
 
@@ -286,8 +288,19 @@ print("Selected Numbers with Positive Trends and Low P-Values", selected_numbers
 ```python
 Selected Numbers with Positive Trends and Low P-Values: [3, 8, 15, 18, 19, 21, 36, 45, 47, 50, 51, 52, 55, 61]
 ```
+
 **Визуализации прогнозируемых вероятностей для 2024-2027 годов:**
+
 ![PredictedProbabilitiesTrends70Numbers](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesFor2024_2027.png)
+
+#### Прогнозирование для Mega Ball
+Аналогичный процесс был выполнен для номеров Mega Ball. В результате были выбраны следующие номера Mega Ball с положительными трендами и низкими p-value:
+```python
+Selected Mega Balls with Positive Trends and Low P-Values: [12, 13, 18, 24, 25]
+```
+**Визуализации прогнозируемых вероятностей Mega Ball для 2024-2027 годов:**
+
+![PredictedProbabilitiesTrendsMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesMegaBall.png)
 
 #### Сравнение с анализом трендов:
 Визуализация и сравнение прогнозируемых частот модели LSTM и анализа трендов.
