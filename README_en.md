@@ -22,19 +22,19 @@ The main goal of this research project is to analyze historical lottery data to 
    - Conduct trend analysis to identify significant numbers based on historical data.
    - Calculate slopes, intercepts, and p-values for each lottery number to determine their statistical significance.
 
-5. **LSTM Model Development**
-   - Develop and train LSTM models to predict future frequencies of number appearances.
-   - Optimize the model using various hyperparameters, such as the look-back period, to enhance prediction accuracy.
+5. **Polynomial Regression Model Development**
+   - Develop and train polynomial regression models to predict the frequency of number occurrences in the future.
+   - Optimize the model using various polynomial degrees to improve prediction accuracy.
 
 6. **Model Evaluation**
-   - Evaluate the performance of the LSTM model using metrics such as Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).
-   - Compare the performance of the LSTM model with traditional trend analysis.
+   - Evaluate the performance of the polynomial regression model using metrics such as Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).
+   - Compare the performance of the polynomial regression model with traditional trend analysis.
 
 7. **Prediction and Comparison**
    - Predicting the frequency of appearance of numbers based on their previous trends.
    - Normalization of data to interpret the results as probabilities of choosing each number in a given year.
-   - Predict the frequency of number appearances for future years using the trained LSTM model.
-   - Compare the LSTM model predictions with trend analysis results to identify similarities and differences.
+   - Predict the frequency of number occurrences for future years using the trained polynomial regression model.
+   - Compare the forecasts of the polynomial regression model with the results of trend analysis to identify similarities and differences.
 
 ## Detailed Methodology
 ### Tools and Libraries
