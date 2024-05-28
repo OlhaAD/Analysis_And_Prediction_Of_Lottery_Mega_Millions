@@ -22,19 +22,19 @@ Das Hauptziel dieses Forschungsprojekts besteht darin, historische Lotto-Daten z
    - Durchführung einer Trendanalyse zur Identifizierung signifikanter Zahlen basierend auf historischen Daten.
    - Berechnung von Steigungen, Achsenabschnitten und p-Werten für jede Lottozahl zur Bestimmung ihrer statistischen Signifikanz.
    
-5. **Entwicklung eines LSTM-Modells**
-   - Entwicklung und Training von LSTM-Modellen zur Vorhersage der Häufigkeit der gezogenen Zahlen in der Zukunft.
-   - Optimierung des Modells unter Verwendung verschiedener Hyperparameter wie der Rückkopplungsperiode (look-back), um die Genauigkeit der Vorhersagen zu erhöhen.
+5. **Entwicklung des polynomiellen Regressionsmodells**
+   - Entwicklung und Training von Modellen der polynomiellen Regression zur Vorhersage der Häufigkeit des Auftretens von Zahlen in der Zukunft.
+   - Optimierung des Modells durch Verwendung verschiedener Polynomgrade zur Verbesserung der Vorhersagegenauigkeit.
 
 6. **Modellbewertung**
-   - Bewertung der Leistung des LSTM-Modells unter Verwendung von Metriken wie dem mittleren absoluten Fehler (MAE) und dem Root Mean Squared Error (RMSE).
-   - Vergleich der Leistung des LSTM-Modells mit der traditionellen Trendanalyse.
+   - Bewertung der Leistung des polynomiellen Regressionsmodells anhand von Metriken wie dem mittleren absoluten Fehler (MAE) und dem Root Mean Squared Error (RMSE).
+   - Vergleich der Leistung des polynomiellen Regressionsmodells mit der traditionellen Trendanalyse.
 
 7. **Vorhersage und Vergleich**
    - Vorhersage der Häufigkeit des Auftretens von Zahlen basierend auf ihren vorherigen Trends.
    - Normalisierung der Daten, um die Ergebnisse als Wahrscheinlichkeiten für die Wahl jeder Zahl in einem bestimmten Jahr zu interpretieren.
-   - Vorhersage der Häufigkeit der gezogenen Zahlen für zukünftige Jahre unter Verwendung des trainierten LSTM-Modells.
-   - Vergleich der Vorhersagen des LSTM-Modells mit den Ergebnissen der Trendanalyse zur Identifizierung von Gemeinsamkeiten und Unterschieden.
+   - Vorhersage der Häufigkeit des Auftretens von Zahlen für zukünftige Jahre unter Verwendung des trainierten polynomiellen Regressionsmodells.
+   - Vergleich der Prognosen des polynomiellen Regressionsmodells mit den Ergebnissen der Trendanalyse zur Identifizierung von Ähnlichkeiten und Unterschieden.
 
 ## Detaillierte Methodik
 ### Werkzeuge und Bibliotheken
