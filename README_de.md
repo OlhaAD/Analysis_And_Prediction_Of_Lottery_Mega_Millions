@@ -26,15 +26,15 @@ Das Hauptziel dieses Forschungsprojekts besteht darin, historische Lotto-Daten z
    - Entwicklung und Training von Modellen der polynomiellen Regression zur Vorhersage der Häufigkeit des Auftretens von Zahlen in der Zukunft.
    - Optimierung des Modells durch Verwendung verschiedener Polynomgrade zur Verbesserung der Vorhersagegenauigkeit.
 
-6. **Modellbewertung**
-   - Bewertung der Leistung des polynomiellen Regressionsmodells anhand von Metriken wie dem mittleren absoluten Fehler (MAE) und dem Root Mean Squared Error (RMSE).
-   - Vergleich der Leistung des polynomiellen Regressionsmodells mit der traditionellen Trendanalyse.
-
-7. **Vorhersage und Vergleich**
+6. **Vorhersage und Vergleich**
    - Vorhersage der Häufigkeit des Auftretens von Zahlen basierend auf ihren vorherigen Trends.
    - Normalisierung der Daten, um die Ergebnisse als Wahrscheinlichkeiten für die Wahl jeder Zahl in einem bestimmten Jahr zu interpretieren.
    - Vorhersage der Häufigkeit des Auftretens von Zahlen für zukünftige Jahre unter Verwendung des trainierten polynomiellen Regressionsmodells.
    - Vergleich der Prognosen des polynomiellen Regressionsmodells mit den Ergebnissen der Trendanalyse zur Identifizierung von Ähnlichkeiten und Unterschieden.
+
+7. **Modellbewertung**
+   - Bewertung der Leistung eines polynomialen Regressionsmodells und einer Trendanalyse anhand von Metriken wie dem mittleren absoluten Fehler (MAE), dem quadratischen Mittelfehler (RMSE) und dem Bestimmtheitsmaß (R²).
+   - Vergleich der Leistung des polynomiellen Regressionsmodells mit der traditionellen Trendanalyse.
 
 ## Detaillierte Methodik
 ### Werkzeuge und Bibliotheken
@@ -315,10 +315,7 @@ else:
     trend_predictions_significant = probability_df70n.loc[:, available_trend_numbers]
     poly_predictions_significant = poly_predictions.loc[:, available_poly_numbers]
 ```
-### Modellbewertung
-- **Metriken:** MAE und RMSE für beide Datensätze.
-- **Vergleich:** Vergleich der Fehler zur Bestimmung der besten Modellkonfiguration.
-- 
+
 ### Vorhersage und Vergleich
 #### Prognose der Häufigkeit von Zahlen
 Die Prognose der Häufigkeit von Lotteriezahlen basiert auf ihren bisherigen Trends (Steigung und Achsenabschnitt, die durch lineare Regression bestimmt werden). Für jede signifikante Zahl (d.h. Zahlen mit einem p-Wert kleiner als 0,3) wird die vorhergesagte Häufigkeit basierend auf der Gleichung der Trendlinie berechnet, wobei der Achsenabschnitt den Anfangswert darstellt und die Steigung die Änderungsrate der Häufigkeit über die Jahre angibt. Dann werden für jedes Jahr im angegebenen Bereich die vorhergesagten Werte berechnet. Der resultierende DataFrame predicted_df70n wird normalisiert, sodass die Werte in jedem Jahr auf 1 summiert werden, was es ermöglicht, die Ergebnisse als Wahrscheinlichkeiten für die Auswahl jeder Zahl in diesem Jahr zu interpretieren.
@@ -388,6 +385,20 @@ Selected Mega Balls with Positive Trends and Low P-Values: [12, 13, 18, 24, 25]
 Um die Daten beider Modelle in einem einzigen Diagramm darzustellen, mussten die Daten zuerst normalisiert werden. Der visuelle Vergleich zeigt erhebliche Unterschiede zwischen den Modellen. Eindeutige Schlussfolgerungen können jedoch nur auf der Grundlage der im nächsten Abschnitt "Modellbewertungen" beschriebenen Metriken gezogen werden.
 
 ![PredictedProbabilitiesPolyMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesCompareTrendsPoly.png)
+
+### Modellbewertungen
+
+Die Leistung des Polynomregressionsmodells und der traditionellen Trendanalyse wurde anhand von Metriken wie dem mittleren absoluten Fehler (MAE), dem Wurzel-der-Mittleren-Quadratischen-Fehler (RMSE) und dem Bestimmtheitsmaß (R²) bewertet.
+Die Ergebnisse für das Jahr 2023 zeigten einen signifikanten Unterschied in der Leistung der beiden Modelle:
+- **Polynomregression:**
+   - **MAE:** 62.048889
+   - **RMSE:** 84.166827
+   - **R²:** -163.522717
+  
+- **Trendanalyse:**
+   - **MAE:** 8.194366
+   - **RMSE:** 9.954820
+   - **R²:** -1.301499
 
 ## Fazit
 Das Projekt zielt darauf ab, fortschrittliche Techniken des maschinellen Lernens zur Verbesserung der Genauigkeit bei der Vorhersage der Häufigkeit von Lottozahlen einzusetzen. Durch den Vergleich der traditionellen Trendanalyse mit Deep-Learning-Modellen soll die effektivste Methode zur Vorhersage von Lottoergebnissen ermittelt werden. Die präsentierten Ergebnisse und Visualisierungen bieten wertvolle Einblicke sowohl für Forscher als auch für Lottoliebhaber.
