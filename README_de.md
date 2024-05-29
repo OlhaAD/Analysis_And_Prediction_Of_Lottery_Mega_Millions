@@ -235,17 +235,86 @@ Diese Ergebnisse der linearen Regression für jede Lotterienummer zeigen den Ste
 
 Zahlen mit signifikant negativen Trends und niedrigen p-Werten (zum Beispiel Nummer 14 mit einem Slope von -0,942857 und einem P-Wert von 0,031797) zeigen eine statistisch signifikante Abnahme der Häufigkeit im Laufe der Zeit. Zahlen mit signifikant positiven Trends und niedrigen p-Werten (zum Beispiel Nummer 18 mit einem Slope von 2,028571 und einem P-Wert von 0,037760) zeigen eine statistisch signifikante Zunahme der Häufigkeit.
 
-### Entwicklung eines LSTM-Modells
-- **Modellarchitektur:**
-  1. LSTM-Schichten mit Dropout zur Regularisierung.
-  2. Ausgangsschicht Dense zur Vorhersage der Häufigkeiten.
-- **Hyperparameter:**
-  1. Rückkopplungsperiode (z.B. 2, 3, 4 Jahre)
-  2. Batch-Größe und Anzahl der Epochen.
-- **Training und Testen:**
-  1. Aufteilung der Daten in Trainings- und Testdatensätze.
-  2. Training des Modells und Bewertung seiner Leistung auf beiden Datensätzen.
-     
+### Entwicklung eines Polynomregressionsmodells
+Die Polynomregression ist eine Methode der Regressionsanalyse, die verwendet wird, um Beziehungen zwischen einer abhängigen Variablen und einer oder mehreren unabhängigen Variablen zu modellieren, indem die unabhängigen Variablen auf verschiedene Potenzen (Grad des Polynoms) angehoben werden. Im Gegensatz zur linearen Regression kann die Polynomregression nichtlineare Beziehungen in den Daten erfassen, was sie nützlich für die Vorhersage komplexer Trends macht.
+
+#### Entwicklungsschritte des Modells
+- **Bestimmung der signifikanten Nummern:**
+Basierend auf der Trendanalyse werden Nummern mit einem p-Wert von weniger als 0,3 ausgewählt. Dies ermöglicht es, sich auf Nummern zu konzentrieren, die einen statistisch signifikanten Einfluss haben.
+
+```python
+significant_numbers = trends_df70n[trends_df70n['P-value'] < 0.3].index.tolist()
+significant_numbers_str = list(map(str, significant_numbers))
+```
+- **Skalierung der Daten:**
+Die Daten werden im Bereich von 0 bis 1 normalisiert, um die Korrektheit des Modells sicherzustellen und die Genauigkeit der Vorhersagen zu verbessern.
+
+```python
+scaler = MinMaxScaler(feature_range=(0, 1))
+scaled_data = scaler.fit_transform(heatmap_df70n)
+```
+- **Vorbereitung der Daten für die Polynomregression:**
+   - Die Daten aus den Jahren 2018-2022 werden zum Training des Modells verwendet.
+   - Das Jahr 2023 wird zur Modellüberprüfung verwendet.
+   - Vorhersagen werden für die Jahre 2023-2027 gemacht.
+
+```python
+years = np.array(heatmap_df70n.index).reshape(-1, 1)
+train_years = np.array([2018, 2019, 2020, 2021, 2022]).reshape(-1, 1)
+test_year = np.array([2023]).reshape(-1, 1)
+future_years = np.array([2023, 2024, 2025, 2026, 2027]).reshape(-1, 1)
+```
+- **Erstellung und Training des Modells:**
+   - Für jede signifikante Nummer werden polynomiale Merkmale erstellt.
+   - Das Modell wird auf den Daten der Jahre 2018-2022 trainiert.
+   - Vorhersagen für das Testjahr (2023) sowie für die zukünftigen Jahre (2024-2027) werden gemacht.
+
+```python
+degree = 2  # Степень полинома
+predictions = {}
+
+for column in heatmap_df70n.columns:
+    poly = PolynomialFeatures(degree)
+    train_years_poly = poly.fit_transform(train_years)
+    test_year_poly = poly.transform(test_year)
+    future_years_poly = poly.transform(future_years)
+    
+    model = LinearRegression()
+    model.fit(train_years_poly, heatmap_df70n.loc[train_years.flatten(), column])
+    
+    test_predict = model.predict(test_year_poly)
+    heatmap_df70n.loc[2023, column] = test_predict[0]
+    
+    future_predict = model.predict(future_years_poly)
+    predictions[column] = future_predict
+```
+- **Transformation und Wiederherstellung der Skalen der Daten:**
+Die Ergebnisse werden in ein DataFrame umgewandelt und die Skalen der Daten zur Interpretation der Ergebnisse wiederhergestellt.
+
+```python
+poly_predictions = pd.DataFrame(predictions, index=[2023, 2024, 2025, 2026, 2027])
+poly_predictions = scaler.inverse_transform(poly_predictions)
+poly_predictions = pd.DataFrame(poly_predictions, columns=heatmap_df70n.columns, index=[2023, 2024, 2025, 2026, 2027])
+```
+- **Verifizierung und Extraktion von Daten für signifikante Nummern:**
+   - Sicherstellen, dass Indizes und Spalten im richtigen Format vorliegen.
+   - Überprüfung, welche Nummern in beiden DataFrames vorhanden sind.
+   - Extraktion der Daten für signifikante Nummern.
+
+```python
+probability_df70n.columns = probability_df70n.columns.astype(str)
+poly_predictions.columns = poly_predictions.columns.astype(str)
+heatmap_df70n.columns = heatmap_df70n.columns.astype(str)
+
+available_trend_numbers = [num for num in significant_numbers_str if num in probability_df70n.columns]
+available_poly_numbers = [num for num in significant_numbers_str if num in poly_predictions.columns]
+
+if not available_trend_numbers or not available_poly_numbers:
+    print("No available trend or poly numbers found.")
+else:
+    trend_predictions_significant = probability_df70n.loc[:, available_trend_numbers]
+    poly_predictions_significant = poly_predictions.loc[:, available_poly_numbers]
+```
 ### Modellbewertung
 - **Metriken:** MAE und RMSE für beide Datensätze.
 - **Vergleich:** Vergleich der Fehler zur Bestimmung der besten Modellkonfiguration.
