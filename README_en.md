@@ -416,5 +416,7 @@ Results for the year 2023 indicated a significant difference in the performance 
    - **R²:** -3.69
 ![ModelPerformenceMitricsMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/MetricsMB.png)
 
+The metrics indicate that traditional trend analysis significantly outperforms the polynomial regression model in terms of prediction accuracy, both for the main numbers and for the Mega Ball. High values of MAE and RMSE, along with negative R² values for polynomial regression, suggest a low predictive capability for this model.
+
 ## Conclusion
 The project aims to use advanced machine learning techniques to improve the accuracy of predicting lottery number frequencies. By comparing traditional trend analysis with polynomial regression models, the study seeks to determine the most effective methods for predicting lottery outcomes. The presented findings and visualizations provide valuable insights for both researchers and lottery enthusiasts, demonstrating that traditional trend analysis offers higher accuracy compared to polynomial regression.
