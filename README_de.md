@@ -389,7 +389,7 @@ Um die Daten beider Modelle in einem einzigen Diagramm darzustellen, mussten die
 ### Modellbewertungen
 
 Die Leistung des Polynomregressionsmodells und der traditionellen Trendanalyse wurde anhand von Metriken wie dem mittleren absoluten Fehler (MAE), dem Wurzel-der-Mittleren-Quadratischen-Fehler (RMSE) und dem Bestimmtheitsmaß (R²) bewertet.
-Die Ergebnisse für das Jahr 2023 zeigten einen signifikanten Unterschied in der Leistung der beiden Modelle:
+Die Ergebnisse für das Jahr 2023 zeigten einen signifikanten Unterschied in der Leistung der beiden Modelle **für die Hauptzahlen**:
 - **Polynomregression:**
    - **MAE:** 62.048889
    - **RMSE:** 84.166827
@@ -399,6 +399,23 @@ Die Ergebnisse für das Jahr 2023 zeigten einen signifikanten Unterschied in der
    - **MAE:** 8.194366
    - **RMSE:** 9.954820
    - **R²:** -1.301499
+  
+ ![ModelPerformenceMitrics](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/Metrics.png)
 
-## Fazit
-Das Projekt zielt darauf ab, fortschrittliche Techniken des maschinellen Lernens zur Verbesserung der Genauigkeit bei der Vorhersage der Häufigkeit von Lottozahlen einzusetzen. Durch den Vergleich der traditionellen Trendanalyse mit Deep-Learning-Modellen soll die effektivste Methode zur Vorhersage von Lottoergebnissen ermittelt werden. Die präsentierten Ergebnisse und Visualisierungen bieten wertvolle Einblicke sowohl für Forscher als auch für Lottoliebhaber.
+**Für Mega Ball:**
+- **Polynomregression**
+  - **MAE:** 22.90
+  - **RMSE:** 30.28
+  - **R²:** -124.88
+  
+- **Trendanalyse:**
+  - **MAE:** 5.18
+  - **RMSE:** 5.84
+  - **R²:** -3.69
+  
+![ModelPerformenceMitricsMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/MetricsMB.png)
+
+Die Metriken zeigen, dass die traditionelle Trendanalyse das Polynomregressionsmodell hinsichtlich der Vorhersagegenauigkeit sowohl für die Hauptzahlen als auch für den Mega Ball deutlich übertrifft. Hohe Werte von MAE und RMSE sowie negative R²-Werte für die Polynomregression deuten auf eine geringe Vorhersagefähigkeit dieses Modells hin.
+
+## Schlussfolgerung
+Das Projekt zielt darauf ab, fortschrittliche Techniken des maschinellen Lernens zu nutzen, um die Genauigkeit der Vorhersage von Lotteriezahlenfrequenzen zu verbessern. Durch den Vergleich der traditionellen Trendanalyse mit Polynomregressionsmodellen soll die effektivste Methode zur Vorhersage von Lotterieergebnissen ermittelt werden. Die vorgestellten Ergebnisse und Visualisierungen bieten wertvolle Einblicke sowohl für Forscher als auch für Lottobegeisterte und zeigen, dass die traditionelle Trendanalyse im Vergleich zur Polynomregression eine höhere Genauigkeit aufweist.
