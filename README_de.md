@@ -363,7 +363,6 @@ Selected Numbers with Positive Trends and Low P-Values: [3, 8, 15, 18, 19, 21, 3
 
 ![PredictedProbabilitiesTrends70Numbers](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesFor2024_2027.png)
 
-#### Vorhersage für Mega Ball
 Ein ähnlicher Prozess wurde für Mega Ball-Zahlen befolgt. Als Ergebnis wurden die folgenden Mega Ball-Zahlen mit positiven Trends und niedrigen p-Werten ausgewählt:
 
 ```python
@@ -374,7 +373,21 @@ Selected Mega Balls with Positive Trends and Low P-Values: [12, 13, 18, 24, 25]
 
 ![PredictedProbabilitiesTrendsMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesMegaBall.png)
 
-- **Vergleich mit der Trendanalyse:** Visualisierung und Vergleich der prognostizierten Häufigkeiten des LSTM-Modells und der Trendanalyse.
-  
+#### Vorhersage der Häufigkeit des Auftretens von Zahlen für zukünftige Jahre unter Verwendung des trainierten polynomiellen Regressionsmodells.
+
+**Visualisierungen der prognostizierten Wahrscheinlichkeiten für 2024–2027 unter Verwendung des trainierten polynomiellen Regressionsmodells:**
+
+![PredictedProbabilitiesPoly70Numbers](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedFrequenciesPoly.png)
+
+**Visualisierungen der prognostizierten Mega Ball-Wahrscheinlichkeiten für 2024–2027 unter Verwendung des trainierten polynomiellen Regressionsmodells:**
+
+![PredictedProbabilitiesPolyMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedFrequenciesPolyMB.png)
+
+#### Vergleich des Polynomregressionsmodells mit der Trendanalyse
+
+Um die Daten beider Modelle in einem einzigen Diagramm darzustellen, mussten die Daten zuerst normalisiert werden. Der visuelle Vergleich zeigt erhebliche Unterschiede zwischen den Modellen. Eindeutige Schlussfolgerungen können jedoch nur auf der Grundlage der im nächsten Abschnitt "Modellbewertungen" beschriebenen Metriken gezogen werden.
+
+![PredictedProbabilitiesPolyMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesCompareTrendsPoly.png)
+
 ## Fazit
 Das Projekt zielt darauf ab, fortschrittliche Techniken des maschinellen Lernens zur Verbesserung der Genauigkeit bei der Vorhersage der Häufigkeit von Lottozahlen einzusetzen. Durch den Vergleich der traditionellen Trendanalyse mit Deep-Learning-Modellen soll die effektivste Methode zur Vorhersage von Lottoergebnissen ermittelt werden. Die präsentierten Ergebnisse und Visualisierungen bieten wertvolle Einblicke sowohl für Forscher als auch für Lottoliebhaber.
