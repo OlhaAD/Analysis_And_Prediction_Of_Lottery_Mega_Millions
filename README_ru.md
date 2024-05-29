@@ -236,16 +236,90 @@ print(trends_df)
 Числа с значительными отрицательными трендами и низкими p-значениями (например, номер 14 со Slope −0.942857 и P-value 0.031797) показывают статистически значимое уменьшение частоты появления со временем. Номера с значительными положительными трендами и низкими p-значениями (например, номер 18 со Slope 2.028571 и P-value 0.037760) показывают статистически значимое увеличение частоты.
 
 
-### Разработка модели LSTM
-- **Архитектура модели:**
-1. LSTM слои с dropout для регуляризации.
-2. Выходной слой Dense для прогнозирования частот.
-- **Гиперпараметры:**
-1. Период обратной связи (например, 2, 3, 4 года).
-2. Размер батча и количество эпох.
-- **Обучение и тестирование:**
-1. Разделение данных на обучающую и тестовую выборки.
-2. Обучение модели и оценка её производительности на обеих выборках.
+### Разработка модели полиномиальной регрессии
+Полиномиальная регрессия является методом регрессионного анализа, который используется для моделирования отношений между зависимой переменной и одной или несколькими независимыми переменными, поднимая независимые переменные в различные степени (степень полинома). В нашем случае зависимая переменная это частота выпадения номеров лотереи. Это переменная, которую мы хотим предсказать. Независимые переменные: годы, за которые у нас есть данные (2018-2022). Это переменные, которые используются для предсказания частоты выпадения номеров в будущем.
+В полиномиальной регрессии мы моделируем зависимость частоты выпадения номеров (зависимая переменная) от времени (независимые переменные), при этом годы поднимаются в различные степени для создания полиномиальных признаков.В отличие от линейной регрессии, полиномиальная регрессия может улавливать нелинейные отношения в данных, что делает её полезной для прогнозирования сложных трендов.
+
+#### Шаги разработки модели
+- **Определение значимых номеров:**
+На основе анализа трендов выбираются номера с p-значением менее 0.3. Это позволяет сосредоточиться на номерах, которые имеют статистически значимое влияние.
+
+```python
+significant_numbers = trends_df70n[trends_df70n['P-value'] < 0.3].index.tolist()
+significant_numbers_str = list(map(str, significant_numbers))
+```
+- **Масштабирование данных:**
+Данные нормализуются в диапазоне от 0 до 1 для обеспечения корректности модели и улучшения точности предсказаний.
+
+```python
+scaler = MinMaxScaler(feature_range=(0, 1))
+scaled_data = scaler.fit_transform(heatmap_df70n)
+```
+
+- **Подготовка данных для полиномиальной регрессии:**
+  - Данные за годы 2018-2022 используются для обучения модели.
+  - 2023 год используется для тестирования модели.
+  - Прогнозы делаются на 2023-2027 годы.
+ 
+```python
+years = np.array(heatmap_df70n.index).reshape(-1, 1)
+train_years = np.array([2018, 2019, 2020, 2021, 2022]).reshape(-1, 1)
+test_year = np.array([2023]).reshape(-1, 1)
+future_years = np.array([2023, 2024, 2025, 2026, 2027]).reshape(-1, 1)
+```
+
+- **Создание и обучение модели:**
+  - Для каждого значимого номера создаются полиномиальные признаки.
+  - Модель обучается на данных за 2018-2022 годы.
+  - Прогнозируется значение для тестового года (2023), а также для будущих лет (2024-2027).
+
+```python
+degree = 2  # Степень полинома
+predictions = {}
+
+for column in heatmap_df70n.columns:
+    poly = PolynomialFeatures(degree)
+    train_years_poly = poly.fit_transform(train_years)
+    test_year_poly = poly.transform(test_year)
+    future_years_poly = poly.transform(future_years)
+    
+    model = LinearRegression()
+    model.fit(train_years_poly, heatmap_df70n.loc[train_years.flatten(), column])
+    
+    test_predict = model.predict(test_year_poly)
+    heatmap_df70n.loc[2023, column] = test_predict[0]
+    
+    future_predict = model.predict(future_years_poly)
+    predictions[column] = future_predict
+```
+- **Преобразование и восстановление масштабов данных:**
+Результаты преобразуются в DataFrame и восстанавливаются масштабы данных для интерпретации результатов.
+
+```python
+poly_predictions = pd.DataFrame(predictions, index=[2023, 2024, 2025, 2026, 2027])
+poly_predictions = scaler.inverse_transform(poly_predictions)
+poly_predictions = pd.DataFrame(poly_predictions, columns=heatmap_df70n.columns, index=[2023, 2024, 2025, 2026, 2027])
+```
+- **Верификация и извлечение данных для значимых номеров:**
+  - Убедимся, что индексы и столбцы в правильном формате.
+  - Проверим, какие номера присутствуют в обоих DataFrame.
+  - Извлечение данных для значимых номеров.
+
+```python
+probability_df70n.columns = probability_df70n.columns.astype(str)
+poly_predictions.columns = poly_predictions.columns.astype(str)
+heatmap_df70n.columns = heatmap_df70n.columns.astype(str)
+
+available_trend_numbers = [num for num in significant_numbers_str if num in probability_df70n.columns]
+available_poly_numbers = [num for num in significant_numbers_str if num in poly_predictions.columns]
+
+if not available_trend_numbers or not available_poly_numbers:
+    print("No available trend or poly numbers found.")
+else:
+    trend_predictions_significant = probability_df70n.loc[:, available_trend_numbers]
+    poly_predictions_significant = poly_predictions.loc[:, available_poly_numbers]
+```
+
 ### Оценка модели
 - **Метрики:**
 MAE и RMSE для обеих выборок.
