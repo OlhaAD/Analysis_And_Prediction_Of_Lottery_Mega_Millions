@@ -26,15 +26,15 @@ The main goal of this research project is to analyze historical lottery data to 
    - Develop and train polynomial regression models to predict the frequency of number occurrences in the future.
    - Optimize the model using various polynomial degrees to improve prediction accuracy.
 
-6. **Model Evaluation**
-   - Evaluate the performance of the polynomial regression model using metrics such as Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).
-   - Compare the performance of the polynomial regression model with traditional trend analysis.
-
-7. **Prediction and Comparison**
+6. **Prediction and Comparison**
    - Predicting the frequency of appearance of numbers based on their previous trends.
    - Normalization of data to interpret the results as probabilities of choosing each number in a given year.
    - Predict the frequency of number occurrences for future years using the trained polynomial regression model.
    - Compare the forecasts of the polynomial regression model with the results of trend analysis to identify similarities and differences.
+
+7. **Model Evaluations**
+   - Evaluation the performance of the polynomial regression model and traditional trend analysis using metrics such as Mean Absolute Error (MAE), Root Mean Square Error (RMSE), and the coefficient of determination (R²).
+   - Compare the performance of the polynomial regression model with traditional trend analysis.
 
 ## Detailed Methodology
 ### Tools and Libraries
@@ -320,12 +320,6 @@ else:
     poly_predictions_significant = poly_predictions.loc[:, available_poly_numbers]
 ```
 
-### Model Evaluation
-- **Metrics:**
-MAE and RMSE for both training and test sets.
-- **Comparison:**
-Compare the error metrics to determine the best-performing model configuration.
-
 ### Prediction and Comparison
 #### Forecasting Number Frequencies
 
@@ -395,5 +389,32 @@ To visualize both models on a single graph, it was necessary to normalize the da
 
 ![PredictedProbabilitiesPolyMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesCompareTrendsPoly.png)
 
+### Model Evaluations
+
+The performance of the polynomial regression model and traditional trend analysis was evaluated using metrics such as Mean Absolute Error (MAE), Root Mean Square Error (RMSE), and the coefficient of determination (R²).
+Results for the year 2023 indicated a significant difference in the performance of the two models **for main numbers**:
+- **Polynomial Regression:**
+   - **MAE:** 62.048889
+   - **RMSE:** 84.166827
+   - **R²:** -163.522717
+
+- **Trend Analysis:**
+   - **MAE:** 8.194366
+   - **RMSE:** 9.954820
+   - **R²:** -1.301499
+
+![ModelPerformenceMitrics](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/Metrics.png)
+
+**For Mega Ball:**
+- **Polynomial Regression:**
+   - **MAE:** 22.90
+   - **RMSE:** 30.28
+   - **R²:** -124.88
+- **Trend Analysis:**
+   - **MAE:** 5.18
+   - **RMSE:** 5.84
+   - **R²:** -3.69
+![ModelPerformenceMitricsMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/MetricsMB.png)
+
 ## Conclusion
-The project aims to leverage advanced machine learning techniques to enhance the accuracy of lottery number frequency predictions. By comparing traditional trend analysis with deep learning models, the research seeks to identify the most effective methods for forecasting lottery outcomes. The findings and visualizations provided will offer valuable insights for both researchers and lottery enthusiasts.
+The project aims to use advanced machine learning techniques to improve the accuracy of predicting lottery number frequencies. By comparing traditional trend analysis with polynomial regression models, the study seeks to determine the most effective methods for predicting lottery outcomes. The presented findings and visualizations provide valuable insights for both researchers and lottery enthusiasts, demonstrating that traditional trend analysis offers higher accuracy compared to polynomial regression.
