@@ -326,7 +326,7 @@ MAE и RMSE для обеих выборок.
 - **Сравнение:**
 Сравнение ошибок для определения наилучшей конфигурации модели.
 ### Прогнозирование и сравнение
-#### Прогнозирование частоты появления номеров
+#### Прогнозирование частоты появления номеров на основе предыдущих трендов
 Прогнозирование частоты появления чисел в лотерее основывается на их предыдущих трендах (наклон и перехват, определённые через линейную регрессию). В цикле для каждого значимого номера (т.е., номеров с p-value меньше 0.3) вычисляется прогнозируемая частота на основе уравнения линии тренда, где Intercept является начальным значением (перехват), а Slope — скорость изменения частоты по годам. Затем, для каждого года из заданного диапазона, вычисляются прогнозируемые значения. Полученный датафрейм predicted_df70n нормализуется, чтобы значения в каждом году суммировались в 1, что позволяет интерпретировать результаты как вероятности выбора каждого номера в данном году.
 
 ```python
@@ -368,7 +368,7 @@ Selected Numbers with Positive Trends and Low P-Values: [3, 8, 15, 18, 19, 21, 3
 
 ![PredictedProbabilitiesTrends70Numbers](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesFor2024_2027.png)
 
-#### Прогнозирование для Mega Ball
+#### Прогнозирование для Mega Ball на основе предыдущих трендов
 Аналогичный процесс был выполнен для номеров Mega Ball. В результате были выбраны следующие номера Mega Ball с положительными трендами и низкими p-value:
 ```python
 Selected Mega Balls with Positive Trends and Low P-Values: [12, 13, 18, 24, 25]
@@ -377,7 +377,20 @@ Selected Mega Balls with Positive Trends and Low P-Values: [12, 13, 18, 24, 25]
 
 ![PredictedProbabilitiesTrendsMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesMegaBall.png)
 
-#### Сравнение с анализом трендов:
-Визуализация и сравнение прогнозируемых частот модели LSTM и анализа трендов.
+#### Прогнозирование частоты выпадения номеров с использованием обученной модели полиномиальной регрессии.
+**Визуализации прогнозируемых вероятностей для 2024-2027 годов:**
+
+![PredictedProbabilitiesPoly70Numbers](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedFrequenciesPoly.png)
+
+**Визуализации прогнозируемых вероятностей Mega Ball для 2024-2027 годов:**
+
+![PredictedProbabilitiesPolyMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedFrequenciesPolyMB.png)
+
+#### Сравнение модели полиномиальной регрессии с анализом трендов:
+
+Для визуализации данных обеих моделей на одном графике, необходимо было сначала нормализовать данные. Визуальное сравнение показывает значительные различия между моделями, однако однозначные выводы можно сделать только на основе метрик, которые описаны в следующем разделе "Оценка модели".
+
+![PredictedProbabilitiesPolyMegaBall](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/PredictedProbabilitiesCompareTrendsPoly.png)
+
 ## Заключение
 Проект направлен на использование передовых техник машинного обучения для повышения точности прогнозирования частоты выпадения номеров в лотерее. Сравнивая традиционный анализ трендов с моделями глубокого обучения, исследование стремится определить наиболее эффективные методы прогнозирования результатов лотереи. Представленные выводы и визуализации предоставят ценные инсайты как для исследователей, так и для любителей лотереи.
