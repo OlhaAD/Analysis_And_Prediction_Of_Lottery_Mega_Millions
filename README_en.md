@@ -237,16 +237,88 @@ These results for the linear regression of each lottery number show the slope co
 
 Numbers with significant negative trends and low p-values (for example, number 14 with a Slope of -0.942857 and a P-value of 0.031797) show a statistically significant decrease in frequency over time. Numbers with significant positive trends and low p-values (for example, number 18 with a Slope of 2.028571 and a P-value of 0.037760) show a statistically significant increase in frequency.
 
-### LSTM Model Development
-- **Model Architecture:**
-1. LSTM layers with dropout for regularization.
-2. Dense output layer to predict frequencies.
-- **Hyperparameters:**
-1. Look-back periods (e.g., 2, 3, 4 years).
-2. Batch size and number of epochs.
-- **Training and Testing:**
-1. Split data into training and test sets.
-2. Train the model and evaluate its performance on both sets.
+### Polynomial Regression Model Development
+Polynomial regression is a form of regression analysis that models the relationship between a dependent variable and one or more independent variables by raising the independent variables to various degrees (polynomial degree). Unlike linear regression, polynomial regression can capture nonlinear relationships in the data, making it useful for predicting complex trends. In our case, the dependent variable is the frequency of lottery numbers. This is the variable we want to predict. Independent variables: years for which we have data (2018-2022). These are variables that are used to predict how often numbers will be drawn in the future.
+#### Model Development Steps
+- **Identification of Significant Numbers:**
+Based on trend analysis, select numbers with a p-value less than 0.3. This allows focusing on numbers that have a statistically significant impact.
+
+```python
+significant_numbers = trends_df70n[trends_df70n['P-value'] < 0.3].index.tolist()
+significant_numbers_str = list(map(str, significant_numbers))
+```
+- **Data Scaling:**
+Normalize the data in the range from 0 to 1 to ensure model correctness and improve prediction accuracy.
+
+```python
+scaler = MinMaxScaler(feature_range=(0, 1))
+scaled_data = scaler.fit_transform(heatmap_df70n)
+```
+- **Data Preparation for Polynomial Regression:**
+   - Data from the years 2018-2022 is used to train the model.
+   - The year 2023 is used for testing the model.
+   - Predictions are made for the years 2023-2027.
+  
+```python
+years = np.array(heatmap_df70n.index).reshape(-1, 1)
+train_years = np.array([2018, 2019, 2020, 2021, 2022]).reshape(-1, 1)
+test_year = np.array([2023]).reshape(-1, 1)
+future_years = np.array([2023, 2024, 2025, 2026, 2027]).reshape(-1, 1)
+```
+
+- **Model Creation and Training:**
+   - Polynomial features are created for each significant number.
+   - The model is trained on data from 2018-2022.
+   - Values are predicted for the test year (2023) and future years (2024-2027).
+
+```python
+degree = 2  # Степень полинома
+predictions = {}
+
+for column in heatmap_df70n.columns:
+    poly = PolynomialFeatures(degree)
+    train_years_poly = poly.fit_transform(train_years)
+    test_year_poly = poly.transform(test_year)
+    future_years_poly = poly.transform(future_years)
+    
+    model = LinearRegression()
+    model.fit(train_years_poly, heatmap_df70n.loc[train_years.flatten(), column])
+    
+    test_predict = model.predict(test_year_poly)
+    heatmap_df70n.loc[2023, column] = test_predict[0]
+    
+    future_predict = model.predict(future_years_poly)
+    predictions[column] = future_predict
+```
+
+- **Transformation and Rescaling of Data:**
+Convert results into a DataFrame and rescale the data for result interpretation.
+
+```python
+poly_predictions = pd.DataFrame(predictions, index=[2023, 2024, 2025, 2026, 2027])
+poly_predictions = scaler.inverse_transform(poly_predictions)
+poly_predictions = pd.DataFrame(poly_predictions, columns=heatmap_df70n.columns, index=[2023, 2024, 2025, 2026, 2027])
+```
+
+- **Verification and Extraction of Significant Numbers:**
+   - Ensure that indexes and columns are in the correct format.
+   - Check which numbers are present in both DataFrames.
+   - Extract data for significant numbers.
+
+```python
+probability_df70n.columns = probability_df70n.columns.astype(str)
+poly_predictions.columns = poly_predictions.columns.astype(str)
+heatmap_df70n.columns = heatmap_df70n.columns.astype(str)
+
+available_trend_numbers = [num for num in significant_numbers_str if num in probability_df70n.columns]
+available_poly_numbers = [num for num in significant_numbers_str if num in poly_predictions.columns]
+
+if not available_trend_numbers or not available_poly_numbers:
+    print("No available trend or poly numbers found.")
+else:
+    trend_predictions_significant = probability_df70n.loc[:, available_trend_numbers]
+    poly_predictions_significant = poly_predictions.loc[:, available_poly_numbers]
+```
 
 ### Model Evaluation
 - **Metrics:**
