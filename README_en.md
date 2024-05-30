@@ -16,7 +16,8 @@ The primary goal of this research project is to analyze historical lottery data 
 
 3. **Data Analysis**
    - Create Q-Q plots to check the normality of the distribution of winning frequencies.
-   - Conduct the Shapiro-Wilk test to statistically assess the normality of the data.
+   - Conducting the Shapiro-Wilk test to assess the normality of the data statistically.
+   - Analyzing to statistically test whether two consecutive numbers are drawn
      
 4. **Trend Analysis**
    - Conduct trend analysis to identify significant numbers based on historical data.
@@ -198,6 +199,38 @@ Shapiro-Wilk test results:
   - p-value: 0.1988
 
 Based on the results of the Shapiro-Wilk test, we can conclude that the distribution of winning frequencies is approximately normal for all considered periods, as the p-values in all cases exceed 0.05.
+
+#### Analyzing to statistically test whether two consecutive numbers are drawn
+
+In this project, historical lottery data was analyzed to identify various patterns. One aspect of the analysis involved examining the probability of consecutive numbers appearing in the draw. The following steps were taken:
+
+```python
+# Function to calculate the percentage of rows with sequential numbers
+def calculate_consecutive_percent(df):
+    # Convert columns with numbers to numeric format
+    cols = ['Number1', 'Number2', 'Number3', 'Number4', 'Number5']
+    df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
+    # Function for checking the presence of sequential numbers
+    def has_consecutive_numbers(row):
+        numbers = sorted(row.dropna().values) 
+        return any(numbers[i] + 1 == numbers[i + 1] for i in range(len(numbers) - 1))
+    # Applying a function to each line
+    df['has_consecutive'] = df[cols].apply(has_consecutive_numbers, axis=1)
+    # Calculate the percentage of rows with sequential numbers
+    percentage = df['has_consecutive'].mean() * 100
+    return percentage
+# Apply the function to each dataframe and display the results
+print(f"Percentage in df56n: {calculate_consecutive_percent(df56n):.2f}%")
+print(f"Percentage in df75n: {calculate_consecutive_percent(df75n):.2f}%")
+print(f"Percentage in df70n: {calculate_consecutive_percent(df70n):.2f}%")
+```
+The analysis results showed the percentage of rows with consecutive numbers:
+- In df56n: 35.44%
+- In df75n: 26.62%
+- In df70n: 26.36%
+
+The probability of drawing two consecutive numbers is highest in df56n - in a lottery with fewer numbers. This is because with a smaller range of numbers, each number has a greater chance of being adjacent to another number in the sequence, reducing the number of possible non-adjacent combinations. Thus, in df56n, where the numbers are up to 56, the percentage of consecutive combinations is higher than in df75n and df70n, where the number ranges are extended to 75 and 70, respectively.
+The percentage of sequence numbers we found is neither particularly high nor very low. It is large enough to attract attention, but not large enough to clearly indicate the presence of a statistically significant pattern.
 
 ### Trend Analysis
 For trend analysis, there is no point in considering lotteries with 56 and 75 numbers, as they were held until 2013. It is more reasonable to focus on analyzing the current lottery with 70 numbers.
