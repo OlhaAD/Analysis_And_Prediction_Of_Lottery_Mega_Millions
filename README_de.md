@@ -1,8 +1,8 @@
-# Analyse und Vorhersage der Häufigkeit von Lottozahlen "Mega Millions" mit maschinellen Lernmodellen
+# Analyse und Vorhersage der Häufigkeit von Lotteriezahlen bei "Mega Millions" mithilfe von Modellen des maschinellen Lernens
 
 ## Ziele und Aufgaben
 ### Ziele
-Das Hauptziel dieses Forschungsprojekts besteht darin, historische Lotto-Daten zu analysieren, um die zukünftige Häufigkeit von Lottozahlen unter Verwendung fortschrittlicher maschineller Lernmodelle, insbesondere Long Short-Term Memory (LSTM)-Netzwerken, vorherzusagen. Das Projekt zielt darauf ab, einen umfassenden Vergleich zwischen der traditionellen Trendanalyse und der Vorhersage auf Basis von Deep Learning zu bieten.
+Das Hauptziel dieses Forschungsprojekts besteht darin, historische Lotteriedaten zu analysieren, um die zukünftige Häufigkeit von Nummern mithilfe fortschrittlicher Modelle des maschinellen Lernens, wie der Polynomregression, vorherzusagen. Das Projekt zielt darauf ab, einen umfassenden Vergleich zwischen der traditionellen Trendanalyse und Methoden des maschinellen Lernens zu bieten, um die effektivsten Techniken zur Vorhersage von Lotterieergebnissen zu bestimmen.
 
 ### Aufgaben
 1. **Datensammlung und -vorverarbeitung**
@@ -53,14 +53,10 @@ Dieses Projekt verwendete die folgenden Werkzeuge und Bibliotheken:
 
 - **Scikit-learn:** Eine maschinelle Lernbibliothek in Python. Verwendet für die Datenvorverarbeitung und Bewertung von Modellen.
    - MinMaxScaler: Zum Skalieren der Daten.
-   - mean_absolute_error, mean_squared_error: Metriken zur Modellbewertung.
+   - mean_absolute_error, mean_squared_error, r2_score: Metriken zur Modellbewertung.
+   - LinearRegression: Lineares Regressionsmodell.
+   - PolynomialFeatures: Datenumwandlung für Polynomregression.
 
-- **TensorFlow und Keras:** Ein Framework und eine High-Level-Bibliothek zum Erstellen und Trainieren von neuronalen Netzwerken.
-   - Sequential: Verwendet zum Erstellen des neuronalen Netzwerks.
-   - LSTM: Langzeit-Kurzzeitspeicher-Schicht für rekurrente neuronale Netzwerke.
-   - Dense: Vollständig verbundene Schicht im neuronalen Netzwerk.
-   - Dropout: Regularisierungsschicht zur Vermeidung von Überanpassung.
-  
 ### Datensammlung und -vorverarbeitung
 - **Datenquelle:** Die Daten für dieses Projekt stammen von https://catalog.data.gov/dataset/lottery-mega-millions-winning-numbers-beginning-2002
 
