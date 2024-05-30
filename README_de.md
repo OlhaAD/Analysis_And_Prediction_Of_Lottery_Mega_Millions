@@ -1,4 +1,4 @@
-# Analyse und Vorhersage der Häufigkeit von Lotteriezahlen bei "Mega Millions" mithilfe von Modellen des maschinellen Lernens
+# Analyse und Vorhersage der Häufigkeit von Lotteriezahlen bei "Mega Millions" mithilfe von Trendanalyse und Polynomregression
 
 ## Ziele und Aufgaben
 ### Ziele
@@ -17,6 +17,7 @@ Das Hauptziel dieses Forschungsprojekts besteht darin, historische Lotteriedaten
 
    - Erstellen von Q-Q-Diagrammen zur Überprüfung der Normalverteilung der Ziehfrequenzen.
    - Durchführung des Shapiro-Wilk-Tests zur statistischen Bewertung der Normalität der Daten.
+   - Durchführung einer Analyse zur statistischen Überprüfung, ob zwei aufeinanderfolgende Zahlen gezogen werden.
 
 4. **Trendanalyse**
    - Durchführung einer Trendanalyse zur Identifizierung signifikanter Zahlen basierend auf historischen Daten.
@@ -197,6 +198,38 @@ Ergebnisse des Shapiro-Wilk-Tests:
   - p-Wert: 0.1988
 
 Basierend auf den Ergebnissen des Shapiro-Wilk-Tests können wir schließen, dass die Verteilung der Gewinnfrequenzen für alle betrachteten Zeiträume ungefähr normal ist, da die p-Werte in allen Fällen 0,05 übersteigen.
+
+#### Durchführung einer Analyse zur statistischen Überprüfung, ob zwei aufeinanderfolgende Zahlen gezogen werden
+
+In diesem Projekt wurden historische Lotteriedaten analysiert, um verschiedene Muster zu identifizieren. Ein Aspekt der Analyse bestand darin, die Wahrscheinlichkeit des Auftretens aufeinanderfolgender Zahlen im Ziehung zu untersuchen. Die folgenden Schritte wurden unternommen:
+
+```python
+# Funktion zur Berechnung des Prozentsatzes der Zeilen mit fortlaufenden Nummern
+def calculate_consecutive_percent(df):
+    # Konvertieren Sie Spalten mit Zahlen in das numerische Format
+    cols = ['Number1', 'Number2', 'Number3', 'Number4', 'Number5']
+    df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
+    # Funktion zur Überprüfung des Vorhandenseins fortlaufender Nummern
+    def has_consecutive_numbers(row):
+        numbers = sorted(row.dropna().values)  
+        return any(numbers[i] + 1 == numbers[i + 1] for i in range(len(numbers) - 1))
+    # Anwenden einer Funktion auf jede Zeile
+    df['has_consecutive'] = df[cols].apply(has_consecutive_numbers, axis=1)
+    # Berechnen Sie den Prozentsatz der Zeilen mit fortlaufenden Nummern
+    percentage = df['has_consecutive'].mean() * 100
+    return percentage
+# Wenden die Funktion auf jeden Datenrahmen an und zeigen Sie die Ergebnisse an
+print(f"Percentage in df56n: {calculate_consecutive_percent(df56n):.2f}%")
+print(f"Percentage in df75n: {calculate_consecutive_percent(df75n):.2f}%")
+print(f"Percentage in df70n: {calculate_consecutive_percent(df70n):.2f}%")
+```
+Die Analyse ergab, dass der Prozentsatz der Zeilen mit aufeinanderfolgenden Zahlen:
+- In df56n: 35.44%
+- In df75n: 26.62%
+- In df70n: 26.36%
+
+Die Wahrscheinlichkeit, zwei aufeinanderfolgende Zahlen zu ziehen, ist in df56n am höchsten – bei einer Lotterie mit weniger Zahlen. Dies liegt daran, dass bei einem kleineren Zahlenbereich die Wahrscheinlichkeit größer ist, dass jede Zahl an eine andere Zahl in der Folge angrenzt, wodurch sich die Anzahl möglicher nicht benachbarter Kombinationen verringert. So ist in df56n, wo die Zahlen bis zu 56 reichen, der Prozentsatz aufeinanderfolgender Kombinationen höher als in df75n und df70n, wo die Zahlenbereiche auf 75 bzw. 70 erweitert werden.
+Der Prozentsatz der von Ihnen gefundenen Sequenznummern ist weder besonders hoch noch sehr niedrig. Es ist groß genug, um Aufmerksamkeit zu erregen, aber nicht groß genug, um eindeutig auf das Vorhandensein eines statistisch signifikanten Musters hinzuweisen.
 
 ### Trendanalyse
 Für die Trendanalyse macht es keinen Sinn, Lotterien mit 56 und 75 Zahlen zu betrachten, da diese bis 2013 durchgeführt wurden. Es ist sinnvoller, sich auf die Analyse der aktuellen Lotterie mit 70 Zahlen zu konzentrieren.
