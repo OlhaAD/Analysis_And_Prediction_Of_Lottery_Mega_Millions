@@ -1,9 +1,9 @@
-# Analysis and Prediction of Lottery "Mega Millions" Number Frequencies Using Machine Learning Models
+# Analysis and Prediction of Lottery Number Frequencies in "Mega Millions" Using Trend Analysis and Polynomial Regression
 
 ## Goals and Objectives
 
 ### Goals
-The main goal of this research project is to analyze historical lottery data to predict the frequency of number appearances in future using advanced machine learning models, specifically Long Short-Term Memory (LSTM) networks. The project aims to provide a comprehensive comparison between traditional trend analysis and deep learning-based predictions.
+The primary goal of this research project is to analyze historical lottery data to predict future number frequencies using advanced machine learning models, such as polynomial regression. The project aims to provide a comprehensive comparison between traditional trend analysis and machine learning methods to determine the most effective techniques for predicting lottery outcomes
 
 ### Objectives
 1. **Data Collection and Preprocessing**
@@ -53,13 +53,9 @@ This project utilized the following tools and libraries:
 
 - **Scikit-learn:** A machine learning library in Python. Used for data preprocessing and model evaluation.
    - MinMaxScaler: For data scaling.
-   - mean_absolute_error, mean_squared_error: Metrics for model evaluation.
-
-- **TensorFlow and Keras:** A framework and high-level library for building and training neural networks.
-   - Sequential: Used for creating the neural network model.
-   - LSTM: Long Short-Term Memory layer for recurrent neural networks.
-   - Dense: Fully connected layer in the neural network.
-   - Dropout: Regularization layer to prevent overfitting.
+   - mean_absolute_error, mean_squared_error, r2_score: Metrics for model evaluation.
+   - LinearRegression: Linear regression model.
+   - PolynomialFeatures: Data transformation for polynomial regression.
   
 ### Data Collection and Preprocessing
 - **Data Source:** The data for this project is taken from https://catalog.data.gov/dataset/lottery-mega-millions-winning-numbers-beginning-2002
