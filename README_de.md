@@ -1,5 +1,11 @@
 # Analyse und Vorhersage der Häufigkeit von Lotteriezahlen bei "Mega Millions" mithilfe von Trendanalyse und Polynomregression
 
+## Wie man ein Projekt startet
+1. Klonen Sie das Repository auf Ihren lokalen Computer.
+2. Die Daten für die Analyse befinden sich im Ordner /data.
+3. Öffnen Sie die Notebooks im Ordner /notebooks über Google Colab oder Jupyter Notebook, um den Code anzusehen und auszuführen.
+4. Installieren Sie die erforderlichen Abhängigkeiten mit dem Befehl pip install -r requirements.txt (vorausgesetzt, Sie haben eine requirements.txt-Datei mit allen Bibliotheken erstellt).
+5. 
 ## Ziele und Aufgaben
 ### Ziele
 Das Hauptziel dieses Forschungsprojekts besteht darin, historische Lotteriedaten zu analysieren, um die zukünftige Häufigkeit von Nummern mithilfe fortschrittlicher Modelle des maschinellen Lernens, wie der Polynomregression, vorherzusagen. Das Projekt zielt darauf ab, einen umfassenden Vergleich zwischen der traditionellen Trendanalyse und Methoden des maschinellen Lernens zu bieten, um die effektivsten Techniken zur Vorhersage von Lotterieergebnissen zu bestimmen.
