@@ -96,9 +96,9 @@ columns_to_convert = ['Number1', 'Number2', 'Number3', 'Number4', 'Number5', 'Me
 df[columns_to_convert] = df[columns_to_convert].apply(pd.to_numeric, downcast='integer', errors='coerce')
 df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 ```
-**Normalisierung und Skalierung für das Training des LSTM-Modells:**
-- Skalierung der numerischen Daten auf einen Bereich von 0 bis 1 zur Verbesserung der Modellleistung.
-- Umwandlung der Daten in ein Format, das den Anforderungen an den LSTM-Input entspricht.
+**Normalisierung und Skalierung der Daten für die polynomielle Regression**
+- Die Daten werden auf einen Bereich von 0 bis 1 normalisiert, um die Genauigkeit des Modells sicherzustellen und die Vorhersagegenauigkeit zu verbessern.
+- Vorbereitung der Daten für die polynomielle Regression.
    
 ### Datenvisualisierung
 **Heatmap der Häufigkeit der Gewinnzahlen nach Jahr**
