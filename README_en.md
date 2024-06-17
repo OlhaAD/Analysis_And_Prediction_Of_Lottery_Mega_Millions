@@ -96,11 +96,10 @@ columns_to_convert = ['Number1', 'Number2', 'Number3', 'Number4', 'Number5', 'Me
 df[columns_to_convert] = df[columns_to_convert].apply(pd.to_numeric, downcast='integer', errors='coerce')
 df['Draw Date'] = pd.to_datetime(df['Draw Date'])
 ```
-**Normalization and Scaling for LSTM Model Training:**
-- Scaling numeric data to a range of 0 to 1 to improve model performance.
-- Transforming data into a format that meets LSTM input requirements.
+**Normalization and Scaling of Data for Polynomial Regression**
+- Data is normalized to a range from 0 to 1 to ensure model accuracy and improve prediction precision.
+- Preparation of data for polynomial regression.
 
-   
 ### Data Visualization
 #### Heatmap of Winning Numbers Frequency by Year
 ![HeatMapFrequencyOfWinningNumbersWithYears](https://github.com/OlhaAD/Analysis_And_Prediction_Of_Lottery_Mega_Millions_Python/blob/main/visualizations/FrequencyOfWinningNumbersYears.png)
